@@ -1,0 +1,154 @@
+# ============================================================
+# REASONKIT-WEB .gitignore - OSS PREPARATION
+# ============================================================
+
+# ============================================================
+# PRIVATE/INTERNAL - NEVER COMMIT
+# ============================================================
+.private/
+*.private
+*-private.*
+*_private.*
+/private/
+/internal/
+/confidential/
+/secret/
+/secrets/
+
+# ============================================================
+# SENSITIVE DOCUMENTS
+# ============================================================
+*LAUNCH*
+*PITCH*
+*STRATEGY*
+*ROADMAP*
+*MARKETING*
+*PRICING_INTERNAL*
+*REVENUE*
+*ARR*
+*MRR*
+*FINANCIALS*
+*INVESTOR*
+*FUNDING*
+*BUSINESS_PLAN*
+*COMPETITIVE*
+*INTERNAL*
+*CONFIDENTIAL*
+*PROPRIETARY*
+*ORCHESTRATOR*
+
+# ============================================================
+# ENVIRONMENT & SECRETS
+# ============================================================
+.env
+.env.*
+*.env
+!.env.example
+.envrc
+*.secret
+*.secrets
+*credentials*
+*api_key*
+*apikey*
+*.pem
+*.key
+*.crt
+*.cert
+
+# ============================================================
+# PYTHON
+# ============================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+
+# ============================================================
+# DATABASE
+# ============================================================
+*.db
+*.sqlite
+*.sqlite3
+/data/
+
+# ============================================================
+# WARC ARCHIVES
+# ============================================================
+*.warc
+*.warc.gz
+/archives/
+
+# ============================================================
+# IDE/EDITOR
+# ============================================================
+.vscode/
+.idea/
+*.sublime-*
+.project
+.settings/
+*.code-workspace
+*.swp
+*.swo
+*~
+
+# ============================================================
+# LOGS
+# ============================================================
+*.log
+logs/
+npm-debug.log*
+
+# ============================================================
+# BACKUP & TEMPORARY FILES
+# ============================================================
+*.bak
+*.backup
+*.old
+*.orig
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# ============================================================
+# PLAYWRIGHT
+# ============================================================
+/test-results/
+/playwright-report/
+/playwright/.cache/
+
+# ============================================================
+# UV LOCK (consider including for reproducibility)
+# ============================================================
+# uv.lock
+
+# ============================================================
+# LEGACY CODE (archived, not for OSS)
+# ============================================================
+/legacy-reasonkit/
