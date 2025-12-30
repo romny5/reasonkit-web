@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" fill="none">
+  <defs>
+    <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="captureGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-color="#06b6d4" flood-opacity="0.4"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="700" fill="#030508"/>
+  <ellipse cx="600" cy="350" rx="500" ry="250" fill="#06b6d4" opacity="0.05"/>
+
+  <!-- Title -->
+  <text x="600" y="50" text-anchor="middle" fill="url(#heroGrad)" font-family="Inter, sans-serif" font-size="36" font-weight="700">WEB CAPTURE PIPELINE</text>
+  <text x="600" y="80" text-anchor="middle" fill="#9ca3af" font-family="Inter, sans-serif" font-size="16">Stealth Browser Automation + WARC Preservation</text>
+
+  <!-- Stage 1: URL Input -->
+  <g transform="translate(100, 130)">
+    <rect x="0" y="0" width="160" height="100" rx="12" fill="#0a0d14" stroke="#ec4899" stroke-width="2"/>
+    <text x="80" y="25" text-anchor="middle" fill="#ec4899" font-family="Inter, sans-serif" font-size="12" font-weight="600">URL INPUT</text>
+    <text x="80" y="50" text-anchor="middle" font-size="24">🔗</text>
+    <text x="80" y="75" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">target URLs</text>
+    <text x="80" y="90" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">or sitemap</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M270 180 L310 180" stroke="#4b5563" stroke-width="2"/>
+  <polygon points="320,180 310,175 310,185" fill="#4b5563"/>
+
+  <!-- Stage 2: Stealth Browser -->
+  <g transform="translate(330, 130)">
+    <rect x="0" y="0" width="180" height="100" rx="12" fill="#0a0d14" stroke="#06b6d4" stroke-width="2" filter="url(#glow)"/>
+    <text x="90" y="25" text-anchor="middle" fill="#06b6d4" font-family="Inter, sans-serif" font-size="12" font-weight="600">STEALTH BROWSER</text>
+    <text x="90" y="50" text-anchor="middle" font-size="24">🕵️</text>
+    <text x="90" y="75" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">Playwright/Chromium</text>
+    <text x="90" y="90" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">anti-detection</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M520 180 L560 180" stroke="#4b5563" stroke-width="2"/>
+  <polygon points="570,180 560,175 560,185" fill="#4b5563"/>
+
+  <!-- Stage 3: Render + Wait -->
+  <g transform="translate(580, 130)">
+    <rect x="0" y="0" width="180" height="100" rx="12" fill="#0a0d14" stroke="#a855f7" stroke-width="2"/>
+    <text x="90" y="25" text-anchor="middle" fill="#a855f7" font-family="Inter, sans-serif" font-size="12" font-weight="600">RENDER ENGINE</text>
+    <text x="90" y="50" text-anchor="middle" font-size="24">⚙️</text>
+    <text x="90" y="75" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">JS execution</text>
+    <text x="90" y="90" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">DOM complete wait</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M770 180 L810 180" stroke="#4b5563" stroke-width="2"/>
+  <polygon points="820,180 810,175 810,185" fill="#4b5563"/>
+
+  <!-- Stage 4: Multi-format Capture -->
+  <g transform="translate(830, 110)">
+    <rect x="0" y="0" width="280" height="140" rx="12" fill="#0a0d14" stroke="#10b981" stroke-width="2"/>
+    <text x="140" y="25" text-anchor="middle" fill="#10b981" font-family="Inter, sans-serif" font-size="12" font-weight="600">MULTI-FORMAT CAPTURE</text>
+
+    <g transform="translate(20, 40)">
+      <rect x="0" y="0" width="75" height="45" rx="6" fill="rgba(16,185,129,0.1)" stroke="#10b981" stroke-width="1"/>
+      <text x="37" y="18" text-anchor="middle" fill="#10b981" font-family="JetBrains Mono, monospace" font-size="9">HTML</text>
+      <text x="37" y="35" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">raw DOM</text>
+    </g>
+
+    <g transform="translate(105, 40)">
+      <rect x="0" y="0" width="75" height="45" rx="6" fill="rgba(16,185,129,0.1)" stroke="#10b981" stroke-width="1"/>
+      <text x="37" y="18" text-anchor="middle" fill="#10b981" font-family="JetBrains Mono, monospace" font-size="9">MD</text>
+      <text x="37" y="35" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">clean text</text>
+    </g>
+
+    <g transform="translate(190, 40)">
+      <rect x="0" y="0" width="75" height="45" rx="6" fill="rgba(16,185,129,0.1)" stroke="#10b981" stroke-width="1"/>
+      <text x="37" y="18" text-anchor="middle" fill="#10b981" font-family="JetBrains Mono, monospace" font-size="9">PNG</text>
+      <text x="37" y="35" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">screenshot</text>
+    </g>
+
+    <g transform="translate(60, 95)">
+      <rect x="0" y="0" width="160" height="35" rx="6" fill="rgba(6,182,212,0.2)" stroke="#06b6d4" stroke-width="1"/>
+      <text x="80" y="15" text-anchor="middle" fill="#06b6d4" font-family="JetBrains Mono, monospace" font-size="9">WARC.GZ</text>
+      <text x="80" y="28" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">full archive bundle</text>
+    </g>
+  </g>
+
+  <!-- Artifacts Output Row -->
+  <g transform="translate(100, 300)">
+    <text x="500" y="0" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="14" font-weight="600">ARTIFACT OUTPUTS</text>
+
+    <!-- HTML artifact -->
+    <g transform="translate(0, 30)">
+      <rect x="0" y="0" width="180" height="100" rx="10" fill="#0a0d14" stroke="#10b981" stroke-width="1"/>
+      <text x="90" y="25" text-anchor="middle" fill="#10b981" font-family="Inter, sans-serif" font-size="12" font-weight="600">page.html</text>
+      <rect x="10" y="35" width="160" height="55" rx="4" fill="#1a1a2e"/>
+      <text x="20" y="52" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">&lt;!DOCTYPE html&gt;</text>
+      <text x="20" y="64" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">&lt;html&gt;</text>
+      <text x="20" y="76" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">  &lt;body&gt;...</text>
+    </g>
+
+    <!-- Markdown artifact -->
+    <g transform="translate(200, 30)">
+      <rect x="0" y="0" width="180" height="100" rx="10" fill="#0a0d14" stroke="#a855f7" stroke-width="1"/>
+      <text x="90" y="25" text-anchor="middle" fill="#a855f7" font-family="Inter, sans-serif" font-size="12" font-weight="600">page.md</text>
+      <rect x="10" y="35" width="160" height="55" rx="4" fill="#1a1a2e"/>
+      <text x="20" y="52" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8"># Page Title</text>
+      <text x="20" y="64" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8"></text>
+      <text x="20" y="76" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">Clean content...</text>
+    </g>
+
+    <!-- Screenshot artifact -->
+    <g transform="translate(400, 30)">
+      <rect x="0" y="0" width="180" height="100" rx="10" fill="#0a0d14" stroke="#ec4899" stroke-width="1"/>
+      <text x="90" y="25" text-anchor="middle" fill="#ec4899" font-family="Inter, sans-serif" font-size="12" font-weight="600">page.png</text>
+      <rect x="10" y="35" width="160" height="55" rx="4" fill="#1a1a2e"/>
+      <rect x="20" y="42" width="140" height="40" rx="2" fill="#2a2a3e" stroke="#4b5563" stroke-width="0.5"/>
+      <text x="90" y="66" text-anchor="middle" fill="#6b7280" font-family="Inter, sans-serif" font-size="8">Visual capture</text>
+    </g>
+
+    <!-- WARC artifact -->
+    <g transform="translate(600, 30)">
+      <rect x="0" y="0" width="180" height="100" rx="10" fill="#0a0d14" stroke="#06b6d4" stroke-width="2"/>
+      <text x="90" y="25" text-anchor="middle" fill="#06b6d4" font-family="Inter, sans-serif" font-size="12" font-weight="600">page.warc.gz</text>
+      <rect x="10" y="35" width="160" height="55" rx="4" fill="#1a1a2e"/>
+      <text x="90" y="52" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">WARC/1.1</text>
+      <text x="90" y="64" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">request + response</text>
+      <text x="90" y="76" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">headers + body</text>
+    </g>
+
+    <!-- Metadata artifact -->
+    <g transform="translate(800, 30)">
+      <rect x="0" y="0" width="180" height="100" rx="10" fill="#0a0d14" stroke="#fbbf24" stroke-width="1"/>
+      <text x="90" y="25" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="12" font-weight="600">meta.json</text>
+      <rect x="10" y="35" width="160" height="55" rx="4" fill="#1a1a2e"/>
+      <text x="20" y="52" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">{"url": "...",</text>
+      <text x="20" y="64" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8"> "timestamp": ...,</text>
+      <text x="20" y="76" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8"> "title": "..."}</text>
+    </g>
+  </g>
+
+  <!-- Stealth Features -->
+  <g transform="translate(100, 480)">
+    <text x="175" y="0" text-anchor="middle" fill="#06b6d4" font-family="Inter, sans-serif" font-size="14" font-weight="600">STEALTH FEATURES</text>
+
+    <g transform="translate(0, 20)">
+      <rect x="0" y="0" width="350" height="120" rx="12" fill="#0a0d14" stroke="#06b6d4" stroke-width="1" stroke-dasharray="5,5"/>
+
+      <text x="30" y="30" fill="#10b981" font-family="Inter, sans-serif" font-size="11">✓ Random user agents</text>
+      <text x="30" y="50" fill="#10b981" font-family="Inter, sans-serif" font-size="11">✓ Viewport randomization</text>
+      <text x="30" y="70" fill="#10b981" font-family="Inter, sans-serif" font-size="11">✓ WebGL fingerprint spoofing</text>
+      <text x="30" y="90" fill="#10b981" font-family="Inter, sans-serif" font-size="11">✓ Timezone/locale matching</text>
+      <text x="30" y="110" fill="#10b981" font-family="Inter, sans-serif" font-size="11">✓ Human-like delays</text>
+
+      <text x="200" y="30" fill="#10b981" font-family="Inter, sans-serif" font-size="11">✓ Cookie persistence</text>
+      <text x="200" y="50" fill="#10b981" font-family="Inter, sans-serif" font-size="11">✓ Proxy rotation</text>
+      <text x="200" y="70" fill="#10b981" font-family="Inter, sans-serif" font-size="11">✓ Headless detection bypass</text>
+      <text x="200" y="90" fill="#10b981" font-family="Inter, sans-serif" font-size="11">✓ Canvas fingerprint</text>
+      <text x="200" y="110" fill="#10b981" font-family="Inter, sans-serif" font-size="11">✓ WebRTC leak prevention</text>
+    </g>
+  </g>
+
+  <!-- Integration -->
+  <g transform="translate(500, 480)">
+    <text x="300" y="0" text-anchor="middle" fill="#a855f7" font-family="Inter, sans-serif" font-size="14" font-weight="600">MCP INTEGRATION</text>
+
+    <g transform="translate(0, 20)">
+      <rect x="0" y="0" width="600" height="120" rx="12" fill="#0a0d14" stroke="#a855f7" stroke-width="2"/>
+
+      <g transform="translate(20, 20)">
+        <rect x="0" y="0" width="170" height="80" rx="8" fill="rgba(168,85,247,0.1)"/>
+        <text x="85" y="25" text-anchor="middle" fill="#a855f7" font-family="Inter, sans-serif" font-size="11" font-weight="600">capture_url</text>
+        <text x="85" y="45" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">Full page capture</text>
+        <text x="85" y="60" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">+ all artifacts</text>
+      </g>
+
+      <g transform="translate(210, 20)">
+        <rect x="0" y="0" width="170" height="80" rx="8" fill="rgba(168,85,247,0.1)"/>
+        <text x="85" y="25" text-anchor="middle" fill="#a855f7" font-family="Inter, sans-serif" font-size="11" font-weight="600">extract_content</text>
+        <text x="85" y="45" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">Selective extraction</text>
+        <text x="85" y="60" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">with selectors</text>
+      </g>
+
+      <g transform="translate(400, 20)">
+        <rect x="0" y="0" width="170" height="80" rx="8" fill="rgba(168,85,247,0.1)"/>
+        <text x="85" y="25" text-anchor="middle" fill="#a855f7" font-family="Inter, sans-serif" font-size="11" font-weight="600">batch_capture</text>
+        <text x="85" y="45" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">Sitemap processing</text>
+        <text x="85" y="60" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">with throttling</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="600" y="680" text-anchor="middle" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">reasonkit-web | Web Capture Layer | Apache 2.0 | reasonkit.sh</text>
+</svg>

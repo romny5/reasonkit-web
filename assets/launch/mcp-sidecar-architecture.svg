@@ -1,0 +1,235 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" fill="none">
+  <defs>
+    <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="mcpGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-color="#a855f7" flood-opacity="0.4"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="750" fill="#030508"/>
+  <ellipse cx="600" cy="375" rx="500" ry="280" fill="#a855f7" opacity="0.04"/>
+
+  <!-- Title -->
+  <text x="600" y="50" text-anchor="middle" fill="url(#heroGrad)" font-family="Inter, sans-serif" font-size="36" font-weight="700">MCP SIDECAR ARCHITECTURE</text>
+  <text x="600" y="80" text-anchor="middle" fill="#9ca3af" font-family="Inter, sans-serif" font-size="16">Model Context Protocol Web Sensing Layer</text>
+
+  <!-- AI Client (Left) -->
+  <g transform="translate(50, 150)">
+    <rect x="0" y="0" width="250" height="450" rx="16" fill="#0a0d14" stroke="#ec4899" stroke-width="2"/>
+    <text x="125" y="35" text-anchor="middle" fill="#ec4899" font-family="Inter, sans-serif" font-size="16" font-weight="700">AI CLIENT</text>
+    <text x="125" y="55" text-anchor="middle" fill="#9ca3af" font-family="Inter, sans-serif" font-size="11">(Claude, GPT, etc.)</text>
+
+    <!-- Client capabilities -->
+    <g transform="translate(20, 80)">
+      <rect x="0" y="0" width="210" height="50" rx="8" fill="rgba(236,72,153,0.1)" stroke="#ec4899" stroke-width="1"/>
+      <text x="105" y="20" text-anchor="middle" fill="#ec4899" font-family="Inter, sans-serif" font-size="11" font-weight="600">Reasoning Engine</text>
+      <text x="105" y="38" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">LLM inference</text>
+    </g>
+
+    <g transform="translate(20, 145)">
+      <rect x="0" y="0" width="210" height="50" rx="8" fill="rgba(236,72,153,0.1)" stroke="#ec4899" stroke-width="1"/>
+      <text x="105" y="20" text-anchor="middle" fill="#ec4899" font-family="Inter, sans-serif" font-size="11" font-weight="600">Tool Caller</text>
+      <text x="105" y="38" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">MCP client</text>
+    </g>
+
+    <g transform="translate(20, 210)">
+      <rect x="0" y="0" width="210" height="50" rx="8" fill="rgba(236,72,153,0.1)" stroke="#ec4899" stroke-width="1"/>
+      <text x="105" y="20" text-anchor="middle" fill="#ec4899" font-family="Inter, sans-serif" font-size="11" font-weight="600">Context Window</text>
+      <text x="105" y="38" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">200k tokens</text>
+    </g>
+
+    <!-- Thought bubble -->
+    <g transform="translate(40, 300)">
+      <rect x="0" y="0" width="170" height="120" rx="12" fill="rgba(236,72,153,0.05)" stroke="#ec4899" stroke-width="1" stroke-dasharray="5,5"/>
+      <text x="85" y="25" text-anchor="middle" fill="#9ca3af" font-family="JetBrains Mono, monospace" font-size="9">"I need to verify</text>
+      <text x="85" y="40" text-anchor="middle" fill="#9ca3af" font-family="JetBrains Mono, monospace" font-size="9">this claim from</text>
+      <text x="85" y="55" text-anchor="middle" fill="#9ca3af" font-family="JetBrains Mono, monospace" font-size="9">3 sources..."</text>
+      <text x="85" y="80" text-anchor="middle" fill="#ec4899" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">→ calls MCP tool</text>
+      <text x="85" y="100" text-anchor="middle" fill="#06b6d4" font-family="JetBrains Mono, monospace" font-size="9">triangulate_claim()</text>
+    </g>
+  </g>
+
+  <!-- MCP Protocol (bidirectional) -->
+  <g transform="translate(320, 250)">
+    <!-- Request arrow -->
+    <path d="M0 0 L80 0" stroke="url(#mcpGrad)" stroke-width="3"/>
+    <polygon points="90,0 80,-5 80,5" fill="#a855f7"/>
+    <text x="45" y="-10" text-anchor="middle" fill="#06b6d4" font-family="JetBrains Mono, monospace" font-size="9">JSON-RPC</text>
+
+    <!-- Response arrow -->
+    <path d="M90 30 L10 30" stroke="url(#mcpGrad)" stroke-width="3"/>
+    <polygon points="0,30 10,25 10,35" fill="#06b6d4"/>
+    <text x="45" y="50" text-anchor="middle" fill="#a855f7" font-family="JetBrains Mono, monospace" font-size="9">Results</text>
+
+    <!-- Protocol box -->
+    <rect x="-10" y="70" width="110" height="40" rx="8" fill="#0a0d14" stroke="url(#mcpGrad)" stroke-width="1"/>
+    <text x="45" y="95" text-anchor="middle" fill="url(#mcpGrad)" font-family="Inter, sans-serif" font-size="10" font-weight="600">stdio / SSE</text>
+  </g>
+
+  <!-- MCP Sidecar (Center) -->
+  <g transform="translate(430, 130)">
+    <rect x="0" y="0" width="340" height="490" rx="16" fill="#0a0d14" stroke="#a855f7" stroke-width="3" filter="url(#glow)"/>
+    <text x="170" y="35" text-anchor="middle" fill="#a855f7" font-family="Inter, sans-serif" font-size="18" font-weight="700">reasonkit-web</text>
+    <text x="170" y="55" text-anchor="middle" fill="#9ca3af" font-family="Inter, sans-serif" font-size="12">MCP SIDECAR</text>
+
+    <!-- Gears module box -->
+    <g transform="translate(20, 75)">
+      <rect x="0" y="0" width="300" height="180" rx="12" fill="rgba(168,85,247,0.1)" stroke="#a855f7" stroke-width="1"/>
+      <text x="150" y="25" text-anchor="middle" fill="#a855f7" font-family="Inter, sans-serif" font-size="12" font-weight="600">GEAR MODULES</text>
+
+      <!-- Capture gear -->
+      <g transform="translate(15, 40)">
+        <rect x="0" y="0" width="125" height="55" rx="6" fill="#0a0d14" stroke="#06b6d4" stroke-width="1"/>
+        <text x="62" y="20" text-anchor="middle" fill="#06b6d4" font-family="Inter, sans-serif" font-size="10" font-weight="600">capture</text>
+        <text x="62" y="38" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">Playwright browser</text>
+        <text x="62" y="50" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">stealth mode</text>
+      </g>
+
+      <!-- Sonar gear -->
+      <g transform="translate(160, 40)">
+        <rect x="0" y="0" width="125" height="55" rx="6" fill="#0a0d14" stroke="#10b981" stroke-width="1"/>
+        <text x="62" y="20" text-anchor="middle" fill="#10b981" font-family="Inter, sans-serif" font-size="10" font-weight="600">sonar</text>
+        <text x="62" y="38" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">Web search APIs</text>
+        <text x="62" y="50" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">Tavily, Exa, etc.</text>
+      </g>
+
+      <!-- Triangulate gear -->
+      <g transform="translate(15, 110)">
+        <rect x="0" y="0" width="125" height="55" rx="6" fill="#0a0d14" stroke="#fbbf24" stroke-width="1"/>
+        <text x="62" y="20" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="10" font-weight="600">triangulate</text>
+        <text x="62" y="38" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">3-source verify</text>
+        <text x="62" y="50" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">ProofGuard</text>
+      </g>
+
+      <!-- Extract gear -->
+      <g transform="translate(160, 110)">
+        <rect x="0" y="0" width="125" height="55" rx="6" fill="#0a0d14" stroke="#ec4899" stroke-width="1"/>
+        <text x="62" y="20" text-anchor="middle" fill="#ec4899" font-family="Inter, sans-serif" font-size="10" font-weight="600">extract</text>
+        <text x="62" y="38" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">Content parsing</text>
+        <text x="62" y="50" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="8">LLM extraction</text>
+      </g>
+    </g>
+
+    <!-- MCP Tools -->
+    <g transform="translate(20, 270)">
+      <rect x="0" y="0" width="300" height="200" rx="12" fill="rgba(6,182,212,0.1)" stroke="#06b6d4" stroke-width="1"/>
+      <text x="150" y="25" text-anchor="middle" fill="#06b6d4" font-family="Inter, sans-serif" font-size="12" font-weight="600">EXPOSED MCP TOOLS</text>
+
+      <text x="20" y="50" fill="#f9fafb" font-family="JetBrains Mono, monospace" font-size="10">• capture_url(url, format)</text>
+      <text x="20" y="70" fill="#f9fafb" font-family="JetBrains Mono, monospace" font-size="10">• web_search(query, engines)</text>
+      <text x="20" y="90" fill="#f9fafb" font-family="JetBrains Mono, monospace" font-size="10">• triangulate_claim(claim)</text>
+      <text x="20" y="110" fill="#f9fafb" font-family="JetBrains Mono, monospace" font-size="10">• extract_content(url, schema)</text>
+      <text x="20" y="130" fill="#f9fafb" font-family="JetBrains Mono, monospace" font-size="10">• batch_capture(urls, opts)</text>
+      <text x="20" y="150" fill="#f9fafb" font-family="JetBrains Mono, monospace" font-size="10">• verify_url(url)</text>
+      <text x="20" y="170" fill="#f9fafb" font-family="JetBrains Mono, monospace" font-size="10">• get_warc(capture_id)</text>
+      <text x="20" y="190" fill="#9ca3af" font-family="JetBrains Mono, monospace" font-size="9">+ 8 more tools...</text>
+    </g>
+  </g>
+
+  <!-- External Arrows to Web -->
+  <g transform="translate(790, 250)">
+    <!-- Request arrow -->
+    <path d="M0 0 L80 0" stroke="#10b981" stroke-width="2"/>
+    <polygon points="90,0 80,-5 80,5" fill="#10b981"/>
+    <text x="45" y="-10" text-anchor="middle" fill="#10b981" font-family="JetBrains Mono, monospace" font-size="9">HTTPS</text>
+
+    <!-- Response arrow -->
+    <path d="M90 30 L10 30" stroke="#10b981" stroke-width="2"/>
+    <polygon points="0,30 10,25 10,35" fill="#10b981"/>
+  </g>
+
+  <!-- External World (Right) -->
+  <g transform="translate(900, 150)">
+    <rect x="0" y="0" width="250" height="450" rx="16" fill="#0a0d14" stroke="#10b981" stroke-width="2"/>
+    <text x="125" y="35" text-anchor="middle" fill="#10b981" font-family="Inter, sans-serif" font-size="16" font-weight="700">EXTERNAL WEB</text>
+
+    <!-- Websites -->
+    <g transform="translate(20, 70)">
+      <rect x="0" y="0" width="210" height="50" rx="8" fill="rgba(16,185,129,0.1)" stroke="#10b981" stroke-width="1"/>
+      <text x="25" y="30" fill="#10b981" font-size="20">🌐</text>
+      <text x="120" y="25" text-anchor="middle" fill="#f9fafb" font-family="Inter, sans-serif" font-size="11" font-weight="600">Websites</text>
+      <text x="120" y="42" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">any public URL</text>
+    </g>
+
+    <!-- Search APIs -->
+    <g transform="translate(20, 135)">
+      <rect x="0" y="0" width="210" height="50" rx="8" fill="rgba(16,185,129,0.1)" stroke="#10b981" stroke-width="1"/>
+      <text x="25" y="30" fill="#10b981" font-size="20">🔍</text>
+      <text x="120" y="25" text-anchor="middle" fill="#f9fafb" font-family="Inter, sans-serif" font-size="11" font-weight="600">Search APIs</text>
+      <text x="120" y="42" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">Tavily, Exa, Brave</text>
+    </g>
+
+    <!-- Documentation -->
+    <g transform="translate(20, 200)">
+      <rect x="0" y="0" width="210" height="50" rx="8" fill="rgba(16,185,129,0.1)" stroke="#10b981" stroke-width="1"/>
+      <text x="25" y="30" fill="#10b981" font-size="20">📚</text>
+      <text x="120" y="25" text-anchor="middle" fill="#f9fafb" font-family="Inter, sans-serif" font-size="11" font-weight="600">Documentation</text>
+      <text x="120" y="42" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">official docs</text>
+    </g>
+
+    <!-- GitHub -->
+    <g transform="translate(20, 265)">
+      <rect x="0" y="0" width="210" height="50" rx="8" fill="rgba(16,185,129,0.1)" stroke="#10b981" stroke-width="1"/>
+      <text x="25" y="30" fill="#10b981" font-size="20">🐙</text>
+      <text x="120" y="25" text-anchor="middle" fill="#f9fafb" font-family="Inter, sans-serif" font-size="11" font-weight="600">GitHub</text>
+      <text x="120" y="42" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">repos, issues, PRs</text>
+    </g>
+
+    <!-- arXiv -->
+    <g transform="translate(20, 330)">
+      <rect x="0" y="0" width="210" height="50" rx="8" fill="rgba(16,185,129,0.1)" stroke="#10b981" stroke-width="1"/>
+      <text x="25" y="30" fill="#10b981" font-size="20">📄</text>
+      <text x="120" y="25" text-anchor="middle" fill="#f9fafb" font-family="Inter, sans-serif" font-size="11" font-weight="600">arXiv Papers</text>
+      <text x="120" y="42" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">research papers</text>
+    </g>
+
+    <!-- News/Forums -->
+    <g transform="translate(20, 395)">
+      <rect x="0" y="0" width="210" height="45" rx="8" fill="rgba(16,185,129,0.1)" stroke="#10b981" stroke-width="1"/>
+      <text x="25" y="28" fill="#10b981" font-size="18">💬</text>
+      <text x="120" y="22" text-anchor="middle" fill="#f9fafb" font-family="Inter, sans-serif" font-size="11" font-weight="600">Forums &amp; News</text>
+      <text x="120" y="38" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">HN, Reddit, SO</text>
+    </g>
+  </g>
+
+  <!-- Data Flow Label -->
+  <g transform="translate(320, 520)">
+    <rect x="0" y="0" width="560" height="60" rx="12" fill="#0a0d14" stroke="url(#heroGrad)" stroke-width="1"/>
+    <text x="280" y="22" text-anchor="middle" fill="url(#heroGrad)" font-family="Inter, sans-serif" font-size="12" font-weight="600">DATA FLOW</text>
+    <text x="280" y="42" text-anchor="middle" fill="#9ca3af" font-family="Inter, sans-serif" font-size="10">AI requests → MCP Sidecar processes → External fetch → Results returned → AI consumes</text>
+  </g>
+
+  <!-- Deployment Options -->
+  <g transform="translate(100, 640)">
+    <rect x="0" y="0" width="300" height="50" rx="10" fill="#0a0d14" stroke="#06b6d4" stroke-width="1"/>
+    <text x="150" y="20" text-anchor="middle" fill="#06b6d4" font-family="Inter, sans-serif" font-size="11" font-weight="600">LOCAL DEPLOYMENT</text>
+    <text x="150" y="38" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">uv run rk-web serve --port 8080</text>
+  </g>
+
+  <g transform="translate(450, 640)">
+    <rect x="0" y="0" width="300" height="50" rx="10" fill="#0a0d14" stroke="#a855f7" stroke-width="1"/>
+    <text x="150" y="20" text-anchor="middle" fill="#a855f7" font-family="Inter, sans-serif" font-size="11" font-weight="600">DOCKER DEPLOYMENT</text>
+    <text x="150" y="38" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">docker run reasonkit/web:latest</text>
+  </g>
+
+  <g transform="translate(800, 640)">
+    <rect x="0" y="0" width="300" height="50" rx="10" fill="#0a0d14" stroke="#10b981" stroke-width="1"/>
+    <text x="150" y="20" text-anchor="middle" fill="#10b981" font-family="Inter, sans-serif" font-size="11" font-weight="600">CLOUD DEPLOYMENT</text>
+    <text x="150" y="38" text-anchor="middle" fill="#6b7280" font-family="JetBrains Mono, monospace" font-size="9">fly deploy / railway up</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="600" y="730" text-anchor="middle" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">reasonkit-web | MCP Sidecar Architecture | Apache 2.0 | reasonkit.sh</text>
+</svg>

@@ -1,4 +1,5 @@
 # REASONKIT-WEB PROJECT CONTEXT
+
 > The Sensing Layer for Autonomous Reasoning | Python MCP Server | Apache 2.0
 
 **LICENSE:** Apache 2.0 (open source)
@@ -37,16 +38,17 @@ If `reasonkit-core` is the **Brain**, `reasonkit-web` is the **Eyes and Ears**.
 
 ## TOOL MAPPING (NO DUPLICATION)
 
-| Tool | Project | Purpose | When to Use |
-|------|---------|---------|-------------|
-| `web_capture` | **web** | Navigate + intercept + create WARC | Before citing any web source |
-| `web_sonar` | **web** | Entropy-based saturation detection | During research loops |
-| `web_triangulate` | **web** | Find 3 independent sources | Verifying claims |
-| `proof_anchor` | **core** | Bind content hash to ledger | After web_capture returns |
-| `proof_verify` | **core** | Check content drift | When re-visiting sources |
-| `proof_lookup` | **core** | Query ledger by hash | Citation retrieval |
+| Tool              | Project  | Purpose                            | When to Use                  |
+| ----------------- | -------- | ---------------------------------- | ---------------------------- |
+| `web_capture`     | **web**  | Navigate + intercept + create WARC | Before citing any web source |
+| `web_sonar`       | **web**  | Entropy-based saturation detection | During research loops        |
+| `web_triangulate` | **web**  | Find 3 independent sources         | Verifying claims             |
+| `proof_anchor`    | **core** | Bind content hash to ledger        | After web_capture returns    |
+| `proof_verify`    | **core** | Check content drift                | When re-visiting sources     |
+| `proof_lookup`    | **core** | Query ledger by hash               | Citation retrieval           |
 
 **Workflow:**
+
 ```
 1. web_capture(url) → returns WARC path + content hash
 2. proof_anchor(content, url) → binds to ProofLedger
@@ -57,13 +59,13 @@ If `reasonkit-core` is the **Brain**, `reasonkit-web` is the **Eyes and Ears**.
 
 ## TECHNOLOGY STACK
 
-| Component | Technology | Purpose |
-|-----------|------------|---------|
+| Component       | Technology       | Purpose               |
+| --------------- | ---------------- | --------------------- |
 | Package Manager | `uv` (MANDATORY) | Dependency management |
-| MCP Interface | `mcp` | Tool exposure |
-| Browser | `playwright` | Web automation |
-| Archiving | `warcio` | ISO 28500 WARC files |
-| HTTP | `httpx` | Async HTTP client |
+| MCP Interface   | `mcp`            | Tool exposure         |
+| Browser         | `playwright`     | Web automation        |
+| Archiving       | `warcio`         | ISO 28500 WARC files  |
+| HTTP            | `httpx`          | Async HTTP client     |
 
 ---
 
@@ -91,6 +93,7 @@ reasonkit-web/
 ## USAGE
 
 ### Installation
+
 ```bash
 cd reasonkit-web
 uv sync
@@ -98,11 +101,13 @@ uv run playwright install chromium
 ```
 
 ### Run MCP Server
+
 ```bash
 uv run web
 ```
 
 ### Claude Desktop Config
+
 ```json
 {
   "mcpServers": {
@@ -155,6 +160,7 @@ timew summary :week
 ```
 
 **Components:**
+
 - `web.capture` → WARC creation and browser automation
 - `web.sonar` → Entropy-based saturation detection
 - `web.triangulate` → Source triangulation for verification
@@ -220,12 +226,12 @@ IDE_EXTENSIONS:
 
 ## CONSTRAINTS (INHERITED)
 
-| Constraint | Details |
-|------------|---------|
-| CONS-010 | UV ONLY - No pip |
-| CONS-001 | No Node.js |
-| CONS-005 | Performance paths in Rust (use core for ledger) |
+| Constraint | Details                                         |
+| ---------- | ----------------------------------------------- |
+| CONS-010   | UV ONLY - No pip                                |
+| CONS-001   | No Node.js                                      |
+| CONS-005   | Performance paths in Rust (use core for ledger) |
 
 ---
 
-*reasonkit-web v0.1.0 | The Sensing Layer | Apache 2.0*
+_reasonkit-web v0.1.0 | The Sensing Layer | Apache 2.0_

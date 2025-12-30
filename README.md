@@ -70,11 +70,11 @@ uv run web
 
 ## Tools
 
-| Tool | Purpose | Output |
-|------|---------|--------|
-| `web_capture` | Navigate + intercept + create WARC | WARC path + content hash |
-| `web_sonar` | Detect information saturation | Entropy score |
-| `web_triangulate` | Find independent sources | 3+ source URLs |
+| Tool              | Purpose                            | Output                   |
+| ----------------- | ---------------------------------- | ------------------------ |
+| `web_capture`     | Navigate + intercept + create WARC | WARC path + content hash |
+| `web_sonar`       | Detect information saturation      | Entropy score            |
+| `web_triangulate` | Find independent sources           | 3+ source URLs           |
 
 ## Requirements
 
