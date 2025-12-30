@@ -15,6 +15,7 @@ ProofLedger tools (proof_anchor, proof_verify) via MCP.
 
 import asyncio
 import logging
+import sys
 from typing import Any
 
 from mcp.server import Server
@@ -167,10 +168,20 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[TextContent]:
         return [TextContent(type="text", text=f"Error: {e!s}")]
 
 
-def main():
+def main() -> int:
     """Run the Web MCP server."""
+    if "-h" in sys.argv or "--help" in sys.argv:
+        print("Usage: web\n\nRuns the ReasonKit Web MCP server over stdio.")
+        return 0
+
     logger.info("Starting ReasonKit Web MCP Server...")
-    asyncio.run(stdio_server(server))
+    asyncio.run(_run_server())
+    return 0
+
+
+async def _run_server() -> None:
+    async with stdio_server() as (read_stream, write_stream):
+        await server.run(read_stream, write_stream, server.create_initialization_options())
 
 
 if __name__ == "__main__":

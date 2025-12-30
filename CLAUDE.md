@@ -117,6 +117,107 @@ uv run web
 
 ---
 
+## TASK MANAGEMENT (MANDATORY - CONS-007)
+
+> **Axiom:** No work exists without task tracking. ALL AI agents MUST use the full task system.
+
+### Taskwarrior Integration
+
+**ALL AI agents MUST use Taskwarrior for task tracking.**
+
+```bash
+# Create task (MANDATORY format for RK-PROJECT)
+task add project:rk-project.web.{component} "{description}" priority:{H|M|L} due:{date} +{tags}
+
+# Examples:
+task add project:rk-project.web.capture "Implement WARC creation" priority:H due:today +python +mcp
+task add project:rk-project.web.sonar "Add entropy detection" priority:M due:friday +automation
+task add project:rk-project.web.triangulate "Build source triangulation" priority:M due:tomorrow +research
+
+# Start working (CRITICAL: Auto-starts timewarrior!)
+task {id} start
+
+# Stop working (pauses time tracking)
+task {id} stop
+
+# Complete task (stops timewarrior, records completion)
+task {id} done
+
+# Add annotations (progress notes, decisions, blockers)
+task {id} annotate "Completed WARC capture, tested with 10 sites"
+task {id} annotate "BLOCKED: Waiting for Playwright update"
+task {id} annotate "DECISION: Using warcio over custom WARC writer"
+
+# View status
+task project:rk-project.web list
+task project:rk-project.web summary
+timew summary :week
+```
+
+**Components:**
+- `web.capture` → WARC creation and browser automation
+- `web.sonar` → Entropy-based saturation detection
+- `web.triangulate` → Source triangulation for verification
+- `web.storage` → WARC archive management
+
+**Full Documentation:** See `ORCHESTRATOR.md` for complete Taskwarrior reference.
+
+---
+
+## MCP SERVERS, SKILLS & PLUGINS (MAXIMIZE)
+
+### MCP Server Usage
+
+**Agents MUST leverage MCP servers for all compatible operations.**
+
+```yaml
+MCP_SERVERS_PRIORITY:
+  - sequential-thinking   # ALWAYS use for complex reasoning chains
+  - filesystem            # File operations
+  - github               # Repository operations
+  - memory               # Persistent memory
+  - puppeteer            # Web automation (reasonkit-web provides this)
+  - fetch                # HTTP requests with caching
+
+USAGE_PATTERN:
+  1. Check if MCP server exists for operation
+  2. If yes: USE IT (preferred over direct implementation)
+  3. If no: Implement in Rust, consider creating MCP server
+```
+
+### Skills & Plugins
+
+```yaml
+SKILLS_MAXIMIZATION:
+  - Use pdf skill for PDF operations
+  - Use xlsx skill for spreadsheet operations
+  - Use docx skill for document operations
+  - Use frontend-design skill for UI work
+  - Use mcp-builder skill for MCP server creation
+
+PLUGIN_PRIORITY:
+  - api-contract-sync for API validation
+  - math for deterministic calculations
+  - experienced-engineer agents for specialized tasks
+```
+
+### Extensions
+
+```yaml
+BROWSER_EXTENSIONS:
+  - Use when web research needed
+  - Prefer official provider extensions
+
+IDE_EXTENSIONS:
+  - Cursor: .cursorrules enforcement
+  - VS Code: copilot-instructions.md
+  - Windsurf: .windsurfrules
+```
+
+**Full Reference:** See [ORCHESTRATOR.md](../../ORCHESTRATOR.md#mcp-servers-skills--plugins-maximize) for complete MCP/Skills/Plugins documentation.
+
+---
+
 ## CONSTRAINTS (INHERITED)
 
 | Constraint | Details |
