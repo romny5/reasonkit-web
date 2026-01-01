@@ -149,6 +149,29 @@ For detailed technical specifications, see [`docs/ARCHITECTURE.md`](docs/ARCHITE
 
 ![ReasonKit Web Technology Stack](./brand/readme/tech_stack.png)
 
+## Version & Maturity
+
+| Component | Status | Notes |
+|-----------|--------|-------|
+| **MCP Server** | ✅ Stable | Model Context Protocol integration |
+| **CDP Client** | ✅ Stable | Chrome DevTools Protocol via chromiumoxide |
+| **Content Extraction** | ✅ Stable | HTML parsing, metadata extraction |
+| **PII Redaction** | ✅ Stable | GDPR-compliant data handling |
+| **WASM Support** | 🔶 Beta | Browser-native execution |
+
+**Current Version:** v0.1.3 | [CHANGELOG](CHANGELOG.md) | [Releases](https://github.com/reasonkit/reasonkit-web/releases)
+
+### Verify Installation
+
+```bash
+# Build and run MCP server
+cargo build --release
+./target/release/reasonkit-web --help
+
+# Or test as a library
+cargo test
+```
+
 ## License
 
 Apache License 2.0 - see [LICENSE](LICENSE)
@@ -161,7 +184,7 @@ Apache License 2.0 - see [LICENSE](LICENSE)
 
 **Part of the ReasonKit Ecosystem**
 
-[ReasonKit Core](https://github.com/ReasonKit/reasonkit-core) • [ReasonKit Mem](https://github.com/ReasonKit/reasonkit-mem) • [Website](https://reasonkit.sh)
+[ReasonKit Core](https://github.com/reasonkit/reasonkit-core) • [ReasonKit Mem](https://github.com/reasonkit/reasonkit-mem) • [Website](https://reasonkit.sh)
 
 *"See How Your AI Thinks"*
 
