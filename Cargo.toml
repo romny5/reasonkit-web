@@ -1,6 +1,6 @@
 [package]
 name = "reasonkit-web"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 rust-version = "1.75"
 license = "Apache-2.0"
@@ -12,6 +12,19 @@ documentation = "https://docs.rs/reasonkit-web"
 readme = "README.md"
 keywords = ["mcp", "browser-automation", "headless", "cdp", "web-scraping"]
 categories = ["web-programming", "web-programming::http-server", "development-tools::testing", "asynchronous"]
+
+# Exclude large assets from crates.io package
+include = [
+    "/src/**/*",
+    "/benches/**/*",
+    "/examples/**/*",
+    "/config/**/*",
+    "/Cargo.toml",
+    "/Cargo.lock",
+    "/README.md",
+    "/LICENSE",
+    "/CHANGELOG.md",
+]
 
 [badges]
 maintenance = { status = "actively-developed" }
