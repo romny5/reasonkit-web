@@ -1,346 +1,228 @@
+//! ReasonKit Web - High-Performance Web Sensing & Browser Automation
+//!
+//! This binary runs the MCP (Model Context Protocol) server for web sensing,
+//! providing AI agents with browser automation and content extraction capabilities.
+
 use anyhow::Result;
-use chromiumoxide::browser::{Browser, BrowserConfig};
-use futures::StreamExt;
-use serde::{Deserialize, Serialize};
-use serde_json::json;
-use std::io::{self, BufRead};
-use tracing::{error, info, Level};
+use clap::{Parser, Subcommand};
+use reasonkit_web::mcp::McpServer;
+use reasonkit_web::{BrowserController, ContentExtractor, LinkExtractor, MetadataExtractor};
+use tracing::{info, Level};
 use tracing_subscriber::FmtSubscriber;
 
-mod gear;
-use gear::{ExtractionGear, InteractionGear, StealthNavigator, VisualFreezer};
+/// ReasonKit Web - Web Sensing & Browser Automation Layer
+#[derive(Parser)]
+#[command(name = "reasonkit-web")]
+#[command(version, about, long_about = None)]
+struct Cli {
+    /// Enable verbose logging
+    #[arg(short, long)]
+    verbose: bool,
 
-// --- MCP Protocol Types (Simplified) ---
+    /// Log level (error, warn, info, debug, trace)
+    #[arg(long, default_value = "info")]
+    log_level: String,
 
-#[derive(Deserialize, Debug)]
-struct JsonRpcRequest {
-    #[allow(dead_code)]
-    jsonrpc: String,
-    method: String,
-    params: Option<serde_json::Value>,
-    id: Option<u64>,
+    #[command(subcommand)]
+    command: Option<Commands>,
 }
 
-#[derive(Serialize, Debug)]
-struct JsonRpcResponse {
-    jsonrpc: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    id: Option<u64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    result: Option<serde_json::Value>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    error: Option<JsonRpcError>,
-}
+#[derive(Subcommand)]
+enum Commands {
+    /// Run the MCP server (default)
+    Serve,
 
-#[derive(Serialize, Debug)]
-struct JsonRpcError {
-    code: i32,
-    message: String,
-}
+    /// Test browser automation
+    Test {
+        /// URL to test with
+        #[arg(default_value = "https://example.com")]
+        url: String,
+    },
 
-#[derive(Serialize, Debug)]
-struct Tool {
-    name: String,
-    description: String,
-    #[serde(rename = "inputSchema")]
-    input_schema: serde_json::Value,
+    /// Extract content from a URL
+    Extract {
+        /// URL to extract from
+        url: String,
+
+        /// Output format (text, markdown, html)
+        #[arg(short, long, default_value = "markdown")]
+        format: String,
+    },
+
+    /// Take a screenshot
+    Screenshot {
+        /// URL to capture
+        url: String,
+
+        /// Output file path
+        #[arg(short, long, default_value = "screenshot.png")]
+        output: String,
+
+        /// Full page capture
+        #[arg(long)]
+        full_page: bool,
+    },
+
+    /// List available tools
+    Tools,
 }
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    // Initialize logging
-    let subscriber = FmtSubscriber::builder()
-        .with_max_level(Level::INFO)
-        .with_writer(std::io::stderr) // MCP uses stdout for communication
-        .finish();
-    tracing::subscriber::set_global_default(subscriber).expect("setting default subscriber failed");
+    let cli = Cli::parse();
 
-    info!("ReasonKit Web (Rust) starting...");
-
-    // Stdin loop for MCP communication
-    let stdin = io::stdin();
-    for line in stdin.lock().lines() {
-        let line = line?;
-        if line.trim().is_empty() {
-            continue;
-        }
-
-        // Try to parse the request
-        if let Ok(req) = serde_json::from_str::<JsonRpcRequest>(&line) {
-            handle_request(req).await?;
-        } else if let Ok(val) = serde_json::from_str::<serde_json::Value>(&line) {
-            // If strict parsing fails, try to extract ID to report error
-            let id = val.get("id").and_then(|v| v.as_u64());
-            send_error(id, -32700, "Parse error");
-        }
-    }
-
-    Ok(())
-}
-
-fn send_error(id: Option<u64>, code: i32, message: &str) {
-    let response = JsonRpcResponse {
-        jsonrpc: "2.0".to_string(),
-        id,
-        result: None,
-        error: Some(JsonRpcError {
-            code,
-            message: message.to_string(),
-        }),
-    };
-    if let Ok(json) = serde_json::to_string(&response) {
-        println!("{}", json);
-    }
-}
-
-async fn handle_request(req: JsonRpcRequest) -> Result<()> {
-    let id = req.id;
-
-    let response = match req.method.as_str() {
-        "initialize" => {
-            json!({
-                "protocolVersion": "0.1.0",
-                "capabilities": {
-                    "tools": {}
-                },
-                "serverInfo": {
-                    "name": "reasonkit-web-rs",
-                    "version": "0.1.0"
-                }
-            })
-        }
-        "tools/list" => {
-            let tools = vec![
-                Tool {
-                    name: "web_capture".to_string(),
-                    description: "Captures a URL as MHTML and Screenshot using stealth browser"
-                        .to_string(),
-                    input_schema: json!({
-                        "type": "object",
-                        "properties": {
-                            "url": { "type": "string" }
-                        },
-                        "required": ["url"]
-                    }),
-                },
-                Tool {
-                    name: "browser_action".to_string(),
-                    description: "Performs an action (click, type, scroll) on a page".to_string(),
-                    input_schema: json!({
-                        "type": "object",
-                        "properties": {
-                            "url": { "type": "string" },
-                            "action": { "type": "string", "enum": ["click", "type", "scroll"] },
-                            "selector": { "type": "string" },
-                            "text": { "type": "string" },
-                            "x": { "type": "integer" },
-                            "y": { "type": "integer" }
-                        },
-                        "required": ["url", "action"]
-                    }),
-                },
-                Tool {
-                    name: "extract_data".to_string(),
-                    description: "Extracts text or HTML from a page".to_string(),
-                    input_schema: json!({
-                        "type": "object",
-                        "properties": {
-                            "url": { "type": "string" },
-                            "type": { "type": "string", "enum": ["text", "html"] },
-                            "selector": { "type": "string" }
-                        },
-                        "required": ["url", "type", "selector"]
-                    }),
-                },
-            ];
-            json!({ "tools": tools })
-        }
-        "tools/call" => {
-            // Safe unwrap because we control the flow, but better to handle gracefully
-            let params = req.params.unwrap_or(json!({}));
-            let name = params.get("name").and_then(|v| v.as_str()).unwrap_or("");
-            let args = params.get("arguments").cloned().unwrap_or(json!({}));
-
-            if name == "web_capture" {
-                if let Some(url) = args.get("url").and_then(|v| v.as_str()) {
-                    match perform_web_capture(url).await {
-                        Ok(result) => json!({ "content": [{ "type": "text", "text": result }] }),
-                        Err(e) => {
-                            error!("Web capture failed: {}", e);
-                            json!({ "isError": true, "content": [{ "type": "text", "text": format!("Error: {}", e) }] })
-                        }
-                    }
-                } else {
-                    json!({ "isError": true, "content": [{ "type": "text", "text": "Missing URL" }] })
-                }
-            } else if name == "browser_action" {
-                let url = args.get("url").and_then(|v| v.as_str()).unwrap_or("");
-                let action = args.get("action").and_then(|v| v.as_str()).unwrap_or("");
-
-                match perform_browser_action(url, action, &args).await {
-                    Ok(result) => json!({ "content": [{ "type": "text", "text": result }] }),
-                    Err(e) => {
-                        error!("Browser action failed: {}", e);
-                        json!({ "isError": true, "content": [{ "type": "text", "text": format!("Error: {}", e) }] })
-                    }
-                }
-            } else if name == "extract_data" {
-                let url = args.get("url").and_then(|v| v.as_str()).unwrap_or("");
-                let type_ = args.get("type").and_then(|v| v.as_str()).unwrap_or("");
-                let selector = args.get("selector").and_then(|v| v.as_str()).unwrap_or("");
-
-                match perform_extraction(url, type_, selector).await {
-                    Ok(result) => json!({ "content": [{ "type": "text", "text": result }] }),
-                    Err(e) => {
-                        error!("Extraction failed: {}", e);
-                        json!({ "isError": true, "content": [{ "type": "text", "text": format!("Error: {}", e) }] })
-                    }
-                }
+    // Initialize logging - always write to stderr so MCP can use stdout
+    let log_level = match cli.log_level.to_lowercase().as_str() {
+        "error" => Level::ERROR,
+        "warn" => Level::WARN,
+        "debug" => Level::DEBUG,
+        "trace" => Level::TRACE,
+        _ => {
+            if cli.verbose {
+                Level::DEBUG
             } else {
-                json!({ "isError": true, "content": [{ "type": "text", "text": "Unknown tool" }] })
+                Level::INFO
             }
         }
-        _ => return Ok(()), // Ignore unknown notifications or methods
     };
 
-    let rpc_response = JsonRpcResponse {
-        jsonrpc: "2.0".to_string(),
-        id,
-        result: Some(response),
-        error: None,
-    };
+    let subscriber = FmtSubscriber::builder()
+        .with_max_level(log_level)
+        .with_writer(std::io::stderr)
+        .with_ansi(true)
+        .finish();
 
-    println!("{}", serde_json::to_string(&rpc_response)?);
+    tracing::subscriber::set_global_default(subscriber)?;
+
+    info!("ReasonKit Web v{} starting...", env!("CARGO_PKG_VERSION"));
+
+    match cli.command.unwrap_or(Commands::Serve) {
+        Commands::Serve => run_mcp_server().await,
+        Commands::Test { url } => run_test(&url).await,
+        Commands::Extract { url, format } => run_extract(&url, &format).await,
+        Commands::Screenshot {
+            url,
+            output,
+            full_page,
+        } => run_screenshot(&url, &output, full_page).await,
+        Commands::Tools => run_list_tools().await,
+    }
+}
+
+async fn run_mcp_server() -> Result<()> {
+    info!("Starting MCP server...");
+    let server = McpServer::new();
+    server.run().await?;
     Ok(())
 }
 
-async fn perform_web_capture(url: &str) -> Result<String> {
-    info!("Launching stealth browser for {}", url);
+async fn run_test(url: &str) -> Result<()> {
+    info!("Testing browser automation with: {}", url);
 
-    let config = BrowserConfig::builder()
-        .with_head() // Start with head for debugging/stealth, or headless for prod
-        .build()
-        .map_err(|e| anyhow::anyhow!("Failed to build browser config: {}", e))?;
+    let controller = BrowserController::new().await?;
+    let page = controller.navigate(url).await?;
 
-    let (mut browser, mut handler) = Browser::launch(config).await?;
+    info!("Navigated successfully to: {}", page.url().await);
 
-    let handle = tokio::task::spawn(async move {
-        while let Some(h) = handler.next().await {
-            if h.is_err() {
-                break;
-            }
-        }
-    });
+    // Extract metadata
+    let metadata = MetadataExtractor::extract(&page).await?;
+    println!("\n=== Page Metadata ===");
+    println!("Title: {:?}", metadata.title);
+    println!("Description: {:?}", metadata.description);
+    println!("Language: {:?}", metadata.language);
 
-    let page = browser.new_page("about:blank").await?;
+    // Extract content
+    let content = ContentExtractor::extract_main_content(&page).await?;
+    println!("\n=== Content Summary ===");
+    println!("Word count: {}", content.word_count);
+    println!("From main element: {}", content.from_main);
+    println!(
+        "Preview: {}...",
+        &content.text.chars().take(200).collect::<String>()
+    );
 
-    // 1. Cloak
-    StealthNavigator::cloak(&page).await?;
+    // Extract links
+    let links = LinkExtractor::extract_all(&page).await?;
+    println!("\n=== Links ===");
+    println!("Total links: {}", links.len());
 
-    // 2. Navigate
-    StealthNavigator::goto_resilient(&page, url).await?;
+    let external: Vec<_> = links
+        .iter()
+        .filter(|l| l.link_type == reasonkit_web::extraction::LinkType::External)
+        .collect();
+    println!("External links: {}", external.len());
 
-    // 3. Capture
-    let mhtml = VisualFreezer::capture_mhtml(&page).await?;
-    let screenshot = VisualFreezer::capture_screenshot(&page).await?;
+    controller.close().await?;
+    info!("Test complete!");
 
-    // In a real app, we'd save these to files or a DB.
-    // For now, return a summary.
-    let mhtml_len = mhtml.len();
-    let screenshot_len = screenshot.len();
-
-    browser.close().await?;
-    handle.await?;
-
-    Ok(format!(
-        "Successfully captured {}. MHTML size: {} bytes, Screenshot size: {} bytes",
-        url, mhtml_len, screenshot_len
-    ))
+    Ok(())
 }
 
-async fn perform_browser_action(
-    url: &str,
-    action: &str,
-    args: &serde_json::Value,
-) -> Result<String> {
-    info!("Performing browser action: {} on {}", action, url);
+async fn run_extract(url: &str, format: &str) -> Result<()> {
+    info!("Extracting content from: {}", url);
 
-    let config = BrowserConfig::builder()
-        .with_head()
-        .build()
-        .map_err(|e| anyhow::anyhow!("Failed to build browser config: {}", e))?;
+    let controller = BrowserController::new().await?;
+    let page = controller.navigate(url).await?;
 
-    let (mut browser, mut handler) = Browser::launch(config).await?;
+    let content = ContentExtractor::extract_main_content(&page).await?;
 
-    let handle = tokio::task::spawn(async move {
-        while let Some(h) = handler.next().await {
-            if h.is_err() {
-                break;
-            }
-        }
-    });
-
-    let page = browser.new_page("about:blank").await?;
-    StealthNavigator::cloak(&page).await?;
-    StealthNavigator::goto_resilient(&page, url).await?;
-
-    match action {
-        "click" => {
-            let selector = args.get("selector").and_then(|v| v.as_str()).unwrap_or("");
-            InteractionGear::click(&page, selector).await?;
-        }
-        "type" => {
-            let selector = args.get("selector").and_then(|v| v.as_str()).unwrap_or("");
-            let text = args.get("text").and_then(|v| v.as_str()).unwrap_or("");
-            InteractionGear::type_text(&page, selector, text).await?;
-        }
-        "scroll" => {
-            let x = args.get("x").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
-            let y = args.get("y").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
-            InteractionGear::scroll(&page, x, y).await?;
-        }
-        _ => return Err(anyhow::anyhow!("Unknown action: {}", action)),
-    }
-
-    // Wait a bit for action to take effect
-    tokio::time::sleep(std::time::Duration::from_millis(500)).await;
-
-    browser.close().await?;
-    handle.await?;
-
-    Ok(format!("Successfully performed {} on {}", action, url))
-}
-
-async fn perform_extraction(url: &str, type_: &str, selector: &str) -> Result<String> {
-    info!("Performing extraction: {} from {}", type_, url);
-
-    let config = BrowserConfig::builder()
-        .with_head()
-        .build()
-        .map_err(|e| anyhow::anyhow!("Failed to build browser config: {}", e))?;
-
-    let (mut browser, mut handler) = Browser::launch(config).await?;
-
-    let handle = tokio::task::spawn(async move {
-        while let Some(h) = handler.next().await {
-            if h.is_err() {
-                break;
-            }
-        }
-    });
-
-    let page = browser.new_page("about:blank").await?;
-    StealthNavigator::cloak(&page).await?;
-    StealthNavigator::goto_resilient(&page, url).await?;
-
-    let result = match type_ {
-        "text" => ExtractionGear::extract_text(&page, selector).await?,
-        "html" => ExtractionGear::extract_html(&page, selector).await?,
-        _ => return Err(anyhow::anyhow!("Unknown extraction type: {}", type_)),
+    let output = match format {
+        "text" => content.text,
+        "html" => content.html,
+        _ => content.markdown.unwrap_or(content.text),
     };
 
-    browser.close().await?;
-    handle.await?;
+    println!("{}", output);
 
-    Ok(result)
+    controller.close().await?;
+    Ok(())
+}
+
+async fn run_screenshot(url: &str, output: &str, full_page: bool) -> Result<()> {
+    use reasonkit_web::browser::{CaptureOptions, PageCapture};
+
+    info!("Taking screenshot of: {}", url);
+
+    let controller = BrowserController::new().await?;
+    let page = controller.navigate(url).await?;
+
+    let options = CaptureOptions {
+        full_page,
+        ..Default::default()
+    };
+
+    let result = PageCapture::capture(&page, &options).await?;
+
+    std::fs::write(output, &result.data)?;
+    info!("Screenshot saved to: {} ({} bytes)", output, result.size);
+
+    controller.close().await?;
+    Ok(())
+}
+
+async fn run_list_tools() -> Result<()> {
+    use reasonkit_web::mcp::AVAILABLE_TOOLS;
+
+    println!("Available MCP Tools:\n");
+    for tool in AVAILABLE_TOOLS {
+        println!("  - {}", tool);
+    }
+    println!();
+
+    // Also show detailed tool info
+    let registry = reasonkit_web::mcp::ToolRegistry::new();
+    let definitions = registry.definitions();
+
+    println!("Tool Details:\n");
+    for def in definitions {
+        println!("{}:", def.name);
+        println!("  Description: {}", def.description);
+        println!(
+            "  Schema: {}",
+            serde_json::to_string_pretty(&def.input_schema)?
+        );
+        println!();
+    }
+
+    Ok(())
 }

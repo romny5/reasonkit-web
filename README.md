@@ -4,13 +4,15 @@
 
 **High-Performance Web Sensing & Browser Automation Layer**
 
+[![Crates.io](https://img.shields.io/crates/v/reasonkit-web?style=flat-square&color=%2306b6d4)](https://crates.io/crates/reasonkit-web)
+[![docs.rs](https://img.shields.io/docsrs/reasonkit-web?style=flat-square&color=%2310b981)](https://docs.rs/reasonkit-web)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square&color=%23a855f7)](LICENSE)
-[![Rust](https://img.shields.io/badge/rust-1.74%2B-orange?style=flat-square&logo=rust)](https://www.rust-lang.org/)
+[![Rust](https://img.shields.io/badge/rust-1.74%2B-orange?style=flat-square&logo=rust&color=%23f97316)](https://www.rust-lang.org/)
 [![MCP](https://img.shields.io/badge/MCP-Compatible-green?style=flat-square&color=%2310b981)](https://modelcontextprotocol.io)
 
 _The Eyes and Ears of AI Reasoning - Now Blazingly Fast_
 
-[ReasonKit Core](https://github.com/ReasonKit/reasonkit-core) | [Website](https://reasonkit.sh)
+[Documentation](https://docs.rs/reasonkit-web) | [Crates.io](https://crates.io/crates/reasonkit-web) | [ReasonKit Core](https://github.com/ReasonKit/reasonkit-core) | [Website](https://reasonkit.sh)
 
 </div>
 
