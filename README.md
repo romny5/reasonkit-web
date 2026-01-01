@@ -1,8 +1,5 @@
 <div align="center">
 
-<!-- Hero Banner - Web Sensing Layer -->
-<img src="https://raw.githubusercontent.com/ReasonKit/reasonkit-core/main/brand/banners/cognitive-engine.png" alt="ReasonKit Web" width="100%" style="border-radius: 12px;">
-
 # ReasonKit Web
 
 **High-Performance Web Sensing & Browser Automation Layer**
@@ -13,7 +10,7 @@
 
 _The Eyes and Ears of AI Reasoning - Now Blazingly Fast_
 
-[ReasonKit Core](https://github.com/ReasonKit/reasonkit-core) | [Documentation](https://reasonkit.sh/docs) | [Website](https://reasonkit.sh)
+[ReasonKit Core](https://github.com/ReasonKit/reasonkit-core) | [Website](https://reasonkit.sh)
 
 </div>
 
