@@ -110,7 +110,7 @@ impl McpServer {
     ///
     /// - `Ok(())` if authentication succeeds or is not required
     /// - `Err(JsonRpcResponse)` with authentication error if validation fails
-    fn validate_auth(&self, request: &JsonRpcRequest) -> std::result::Result<(), JsonRpcResponse> {
+    fn validate_auth(&self, request: &JsonRpcRequest) -> std::result::Result<(), Box<JsonRpcResponse>> {
         let expected_token = match &self.auth_token {
             Some(token) => token,
             None => return Ok(()), // No auth required if token not configured
@@ -134,11 +134,11 @@ impl McpServer {
                         method = %request.method,
                         "Authentication failed: invalid token"
                     );
-                    Err(JsonRpcResponse::error(
+                    Err(Box::new(JsonRpcResponse::error(
                         request.id.clone(),
                         AUTH_ERROR_CODE,
                         "Authentication failed: invalid token",
-                    ))
+                    )))
                 }
             }
             None => {
@@ -146,11 +146,11 @@ impl McpServer {
                     method = %request.method,
                     "Authentication failed: missing auth_token in params"
                 );
-                Err(JsonRpcResponse::error(
+                Err(Box::new(JsonRpcResponse::error(
                     request.id.clone(),
                     AUTH_ERROR_CODE,
                     "Authentication required: missing auth_token in params",
-                ))
+                )))
             }
         }
     }
@@ -237,7 +237,7 @@ impl McpServer {
         // Validate authentication BEFORE processing any method
         // This prevents unauthenticated access to any server functionality
         if let Err(auth_error) = self.validate_auth(&request) {
-            return Some(auth_error);
+            return Some(*auth_error);
         }
 
         let result = match method {
@@ -350,7 +350,7 @@ fn constant_time_compare(a: &str, b: &str) -> bool {
         // Use a dummy comparison against self
         let mut _dummy: u8 = 0;
         for byte in a_bytes.iter() {
-            _dummy |= byte ^ byte; // Always 0, but compiler shouldn't optimize out
+            _dummy |= *byte; // Always 0, but compiler shouldn't optimize out
         }
         return false;
     }

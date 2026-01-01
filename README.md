@@ -25,11 +25,7 @@ Web sensing and browser automation layer for ReasonKit. Implements the Model Con
 
 ## Features
 
-- **Headless Browser Automation** - Full browser control via ChromiumOxide (CDP)
-- **MCP Server** - Model Context Protocol for AI integration
-- **Web Capture** - Screenshot, PDF, and HTML capture
-- **Content Extraction** - Intelligent content parsing and metadata extraction
-- **High Performance** - Async Rust runtime (Tokio) for low-latency operations
+![ReasonKit Web Features](./brand/readme-assets/features.png)
 
 ## Quick Start
 
@@ -56,10 +52,7 @@ The ReasonKit Web layer implements a high-performance web sensing architecture d
 
 ### Integration Flow
 
-1. **AI Agent** → **MCP Server** → Initiates web sensing operations
-2. **Browser Controller** → Navigates and captures web content
-3. **Extraction Engine** → Processes content for structured data
-4. **Memory Integration** → Sends results to `reasonkit-mem` for triangulation
+![ReasonKit Web Integration Flow](./brand/readme-assets/integration_flow.png)
 
 For detailed technical specifications, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 

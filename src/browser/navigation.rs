@@ -119,7 +119,7 @@ impl UrlValidator {
             // Remove port if present
             let host = host_with_port
                 .rsplit(':')
-                .last()
+                .next_back()
                 .or(Some(host_with_port))
                 .map(|h| {
                     if host_with_port.contains(':') && !host_with_port.starts_with('[') {
@@ -181,11 +181,7 @@ impl RateLimiter {
 
     /// Get remaining requests in current window
     pub fn remaining(&self) -> u32 {
-        if self.request_count >= self.max_requests {
-            0
-        } else {
-            self.max_requests - self.request_count
-        }
+        self.max_requests.saturating_sub(self.request_count)
     }
 
     /// Reset the rate limiter

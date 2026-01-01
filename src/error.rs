@@ -749,8 +749,8 @@ impl From<anyhow::Error> for WebError {
 /// Generate a unique request ID for tracing
 pub fn generate_request_id() -> String {
     use rand::Rng;
-    let mut rng = rand::thread_rng();
-    let id: u64 = rng.gen();
+    let mut rng = rand::rng();
+    let id: u64 = rng.random();
     format!("req_{:016x}", id)
 }
 

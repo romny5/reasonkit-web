@@ -27,10 +27,19 @@
 #![warn(missing_docs)]
 #![warn(clippy::all)]
 
-#[cfg(target_arch = "wasm32")]
-use wasm_bindgen::prelude::*;
+pub mod browser;
+pub mod error;
+pub mod extraction;
+pub mod mcp;
 
-/// Browser connector configuration
+// Re-export key components for convenience
+pub use browser::controller::BrowserController;
+pub use error::Error;
+pub use extraction::content::ContentExtractor;
+pub use extraction::links::LinkExtractor;
+pub use extraction::metadata::MetadataExtractor;
+
+/// Configuration defaults
 pub mod config {
     /// Default connection timeout in milliseconds
     pub const DEFAULT_TIMEOUT_MS: u64 = 30_000;
@@ -94,29 +103,6 @@ impl Default for WasmBrowserConnector {
         Self::new()
     }
 }
-
-/// Error types for the browser connector
-#[derive(Debug, thiserror::Error)]
-pub enum Error {
-    /// Connection error
-    #[error("Connection error: {0}")]
-    Connection(String),
-
-    /// Navigation error
-    #[error("Navigation error: {0}")]
-    Navigation(String),
-
-    /// Capture error
-    #[error("Capture error: {0}")]
-    Capture(String),
-
-    /// Timeout error
-    #[error("Operation timed out after {0}ms")]
-    Timeout(u64),
-}
-
-/// Result type alias
-pub type Result<T> = std::result::Result<T, Error>;
 
 #[cfg(test)]
 mod tests {
