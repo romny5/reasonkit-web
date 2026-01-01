@@ -1,8 +1,9 @@
 <div align="center">
 
-# ReasonKit Web
+# ReasonKit Web (Rust Edition)
 
 **High-Performance Web Sensing & Browser Automation Layer**
+**Rust-Native Implementation**
 
 [![Crates.io](https://img.shields.io/crates/v/reasonkit-web?style=flat-square&color=%2306b6d4)](https://crates.io/crates/reasonkit-web)
 [![docs.rs](https://img.shields.io/docsrs/reasonkit-web?style=flat-square&color=%2310b981)](https://docs.rs/reasonkit-web)
@@ -42,31 +43,25 @@ cargo build --release
 
 ## Architecture
 
-<div align="center">
+The ReasonKit Web layer implements a high-performance web sensing architecture designed for AI reasoning systems:
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                      WEB SENSING LAYER (RUST)                   │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│   AI Agent ──▶ MCP Server ──▶ Browser Controller (CDP)         │
-│                    │                │                           │
-│                    ▼                ▼                           │
-│              ┌──────────┐    ┌──────────────┐                   │
-│              │ Capture  │    │ Extraction   │                   │
-│              └────┬─────┘    └──────┬───────┘                   │
-│                   │                 │                           │
-│                   ▼                 ▼                           │
-│            Screenshots        Content + Metadata                │
-│            PDFs, HTML         Links, Structured Data            │
-│                   │                 │                           │
-│                   └────────┬────────┘                           │
-│                            ▼                                    │
-│                    reasonkit-mem (Triangulation)                │
-└─────────────────────────────────────────────────────────────────┘
-```
+![ReasonKit Web Sensing Architecture](./brand/readme-assets/web_sensing_layer.png)
 
-**Note:** Content extraction happens in `reasonkit-web`. Multi-source triangulation and verification are delegated to `reasonkit-mem` via the PyO3 bridge. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for details.
+### Key Design Principles
+
+**Performance-First**: Built in Rust with async/await for maximum throughput
+**Protocol-Driven**: Implements Model Context Protocol (MCP) for AI integration
+**Modular Design**: Separates capture, extraction, and memory for flexibility
+**Security-Focused**: Headless browser isolation and content sanitization
+
+### Integration Flow
+
+1. **AI Agent** → **MCP Server** → Initiates web sensing operations
+2. **Browser Controller** → Navigates and captures web content
+3. **Extraction Engine** → Processes content for structured data
+4. **Memory Integration** → Sends results to `reasonkit-mem` for triangulation
+
+For detailed technical specifications, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 </div>
 
