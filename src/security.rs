@@ -36,18 +36,14 @@
 //! ```
 
 use std::collections::HashMap;
-use std::convert::Infallible;
 use std::env;
-use std::future::Future;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
-use std::pin::Pin;
 use std::sync::Arc;
-use std::task::{Context, Poll};
 use std::time::{Duration, Instant};
 
 use thiserror::Error;
 use tokio::sync::RwLock;
-use tracing::{debug, error, info, warn};
+use tracing::{debug, info, warn};
 
 /// Security-related error types
 #[derive(Error, Debug)]

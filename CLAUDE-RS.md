@@ -1,11 +1,11 @@
-# REASONKIT-WEB-RS PROJECT CONTEXT
+# ReasonKit-WEB-RS PROJECT CONTEXT
 
 > MCP Sidecar for Web Sensing | Pure Rust Implementation
 > "Designed, Not Dreamed" | Browser Capture Without Node.js
 
 **LICENSE:** Apache 2.0 (Open Source)
 **STATUS:** Active Development
-**WEBSITE:** https://reasonkit.sh/docs/web-rs
+**WEBSITE:** <https://reasonkit.sh/docs/web-rs>
 
 ---
 
@@ -26,7 +26,7 @@
 
 ### Purpose
 
-reasonkit-web-rs is a **pure Rust MCP (Model Context Protocol) sidecar** that provides browser capture and web sensing capabilities. It runs alongside AI agents to enable:
+ReasonKit-web-rs is a **pure Rust MCP (Model Context Protocol) sidecar** that provides browser capture and web sensing capabilities. It runs alongside AI agents to enable:
 
 - **Browser Content Capture** - Extract and process web page content
 - **DOM Analysis** - Parse and analyze document structure
@@ -37,35 +37,35 @@ reasonkit-web-rs is a **pure Rust MCP (Model Context Protocol) sidecar** that pr
 
 ## TECHNOLOGY STACK
 
-| Component       | Technology        | Version | Purpose                      |
-| --------------- | ----------------- | ------- | ---------------------------- |
-| **Language**    | Rust              | 1.74+   | Core implementation          |
-| **Framework**   | Axum              | 0.7     | HTTP server framework        |
-| **Async**       | Tokio             | 1.x     | Async runtime                |
-| **Serialization** | Serde           | 1.x     | JSON serialization           |
-| **HTTP Client** | Reqwest           | 0.11+   | Outbound HTTP requests       |
-| **WebDriver**   | thirtyfour        | 0.31+   | Browser automation (optional)|
-| **HTML Parse**  | scraper           | 0.18+   | DOM parsing                  |
+| Component         | Technology | Version | Purpose                       |
+| ----------------- | ---------- | ------- | ----------------------------- |
+| **Language**      | Rust       | 1.74+   | Core implementation           |
+| **Framework**     | Axum       | 0.7     | HTTP server framework         |
+| **Async**         | Tokio      | 1.x     | Async runtime                 |
+| **Serialization** | Serde      | 1.x     | JSON serialization            |
+| **HTTP Client**   | Reqwest    | 0.11+   | Outbound HTTP requests        |
+| **WebDriver**     | thirtyfour | 0.31+   | Browser automation (optional) |
+| **HTML Parse**    | scraper    | 0.18+   | DOM parsing                   |
 
 ---
 
 ## HARD CONSTRAINTS (NEVER VIOLATE)
 
-| ID           | Constraint                 | Enforcement | Consequence               |
-| ------------ | -------------------------- | ----------- | ------------------------- |
-| **WEB-001**  | NO NODE.JS                 | HARD        | Reject at code review     |
-| **WEB-002**  | Localhost Binding Default  | HARD        | Security requirement      |
-| **WEB-003**  | No Hardcoded Secrets       | HARD        | Security incident         |
-| **WEB-004**  | Token Auth Required        | HARD        | All endpoints protected   |
-| **WEB-005**  | CONS-003 Compliance        | HARD        | Environment variables     |
-| **WEB-006**  | Memory Safety              | HARD        | No unsafe without doc     |
+| ID          | Constraint                | Enforcement | Consequence             |
+| ----------- | ------------------------- | ----------- | ----------------------- |
+| **WEB-001** | NO NODE.JS                | HARD        | Reject at code review   |
+| **WEB-002** | Localhost Binding Default | HARD        | Security requirement    |
+| **WEB-003** | No Hardcoded Secrets      | HARD        | Security incident       |
+| **WEB-004** | Token Auth Required       | HARD        | All endpoints protected |
+| **WEB-005** | CONS-003 Compliance       | HARD        | Environment variables   |
+| **WEB-006** | Memory Safety             | HARD        | No unsafe without doc   |
 
 ### Security Requirements
 
 ```yaml
 BINDING:
   default: "127.0.0.1:8765"
-  remote_allowed: false  # Must be explicitly enabled
+  remote_allowed: false # Must be explicitly enabled
 
 AUTHENTICATION:
   method: "Bearer Token"
@@ -123,15 +123,15 @@ reasonkit-web-rs/
 
 ## KEY FILES
 
-| File                     | Purpose                              |
-| ------------------------ | ------------------------------------ |
-| `src/main.rs`            | Server entry point, Axum router      |
-| `src/mcp_protocol.rs`    | MCP types and message definitions    |
-| `src/handlers/`          | Request handlers for each endpoint   |
-| `src/security.rs`        | Token validation middleware          |
-| `src/config.rs`          | Configuration loading and validation |
-| `src/browser/driver.rs`  | WebDriver lifecycle management       |
-| `Cargo.toml`             | Dependencies and crate metadata      |
+| File                    | Purpose                              |
+| ----------------------- | ------------------------------------ |
+| `src/main.rs`           | Server entry point, Axum router      |
+| `src/mcp_protocol.rs`   | MCP types and message definitions    |
+| `src/handlers/`         | Request handlers for each endpoint   |
+| `src/security.rs`       | Token validation middleware          |
+| `src/config.rs`         | Configuration loading and validation |
+| `src/browser/driver.rs` | WebDriver lifecycle management       |
+| `Cargo.toml`            | Dependencies and crate metadata      |
 
 ---
 
@@ -250,22 +250,22 @@ journalctl -u reasonkit-web -f
 
 ### Supported Methods
 
-| Method            | Description                    | Status      |
-| ----------------- | ------------------------------ | ----------- |
-| `tools/list`      | List available tools           | Implemented |
-| `tools/call`      | Execute a tool                 | Implemented |
-| `resources/list`  | List available resources       | Planned     |
-| `resources/read`  | Read a resource                | Planned     |
+| Method           | Description              | Status      |
+| ---------------- | ------------------------ | ----------- |
+| `tools/list`     | List available tools     | Implemented |
+| `tools/call`     | Execute a tool           | Implemented |
+| `resources/list` | List available resources | Planned     |
+| `resources/read` | Read a resource          | Planned     |
 
 ### Available Tools
 
-| Tool             | Description                        | Parameters           |
-| ---------------- | ---------------------------------- | -------------------- |
-| `capture_page`   | Capture web page content           | `url: string`        |
-| `analyze_dom`    | Analyze DOM structure              | `url: string`        |
-| `screenshot`     | Take page screenshot               | `url: string, format: png|jpg` |
-| `extract_links`  | Extract all links from page        | `url: string`        |
-| `extract_text`   | Extract readable text from page    | `url: string`        |
+| Tool            | Description                     | Parameters                |
+| --------------- | ------------------------------- | ------------------------- | ---- |
+| `capture_page`  | Capture web page content        | `url: string`             |
+| `analyze_dom`   | Analyze DOM structure           | `url: string`             |
+| `screenshot`    | Take page screenshot            | `url: string, format: png | jpg` |
+| `extract_links` | Extract all links from page     | `url: string`             |
+| `extract_text`  | Extract readable text from page | `url: string`             |
 
 ### Request Format
 
@@ -422,13 +422,13 @@ All errors return proper MCP error format:
 
 ### Environment Variables
 
-| Variable               | Required | Default       | Description           |
-| ---------------------- | -------- | ------------- | --------------------- |
-| `REASONKIT_WEB_TOKEN`  | Yes      | -             | Authentication token  |
-| `REASONKIT_WEB_HOST`   | No       | `127.0.0.1`   | Bind address          |
-| `REASONKIT_WEB_PORT`   | No       | `8765`        | Listen port           |
-| `RUST_LOG`             | No       | `info`        | Log level             |
-| `WEBDRIVER_URL`        | No       | -             | WebDriver endpoint    |
+| Variable              | Required | Default     | Description          |
+| --------------------- | -------- | ----------- | -------------------- |
+| `REASONKIT_WEB_TOKEN` | Yes      | -           | Authentication token |
+| `REASONKIT_WEB_HOST`  | No       | `127.0.0.1` | Bind address         |
+| `REASONKIT_WEB_PORT`  | No       | `8765`      | Listen port          |
+| `RUST_LOG`            | No       | `info`      | Log level            |
+| `WEBDRIVER_URL`       | No       | -           | WebDriver endpoint   |
 
 ### Config File (config/default.toml)
 
@@ -457,10 +457,10 @@ format = "json"
 
 | Project            | Relationship                               |
 | ------------------ | ------------------------------------------ |
-| **reasonkit-core** | Uses as Rust library for ThinkTool support |
-| **reasonkit-web**  | Python counterpart (MCP protocol bridge)   |
-| **reasonkit-mem**  | Can store captured content                 |
-| **reasonkit-pro**  | Extended browser capabilities              |
+| **ReasonKit-core** | Uses as Rust library for ThinkTool support |
+| **ReasonKit-web**  | Python counterpart (MCP protocol bridge)   |
+| **ReasonKit-mem**  | Can store captured content                 |
+| **ReasonKit-pro**  | Extended browser capabilities              |
 
 ---
 
@@ -470,7 +470,7 @@ format = "json"
 2. **LOCALHOST ONLY** - Default binding is 127.0.0.1 (WEB-002)
 3. **NO HARDCODED SECRETS** - Use environment variables (WEB-003, CONS-003)
 4. **TOKEN AUTH REQUIRED** - All endpoints require authentication (WEB-004)
-5. **RUST-FIRST** - No Python in production paths
+5. **Rust-FIRST** - No Python in production paths
 6. **QUALITY GATES** - All 5 gates must pass before merge
 7. **TASK TRACKING** - All work tracked in Taskwarrior
 
@@ -484,14 +484,14 @@ Version: 1.0.0
 Last Updated: 2026-01-01
 Changelog:
   - v1.0.0 - Initial CLAUDE.md for reasonkit-web-rs
-            - Project identity and technology stack
-            - Hard constraints and security requirements
-            - Development commands and deployment
-            - MCP protocol documentation
-            - Testing and configuration guides
+    - Project identity and technology stack
+    - Hard constraints and security requirements
+    - Development commands and deployment
+    - MCP protocol documentation
+    - Testing and configuration guides
 ```
 
 ---
 
-_reasonkit-web-rs | MCP Sidecar for Web Sensing | Pure Rust_
-_https://reasonkit.sh_
+*ReasonKit-web-rs | MCP Sidecar for Web Sensing | Pure Rust*
+*<https://reasonkit.sh>*

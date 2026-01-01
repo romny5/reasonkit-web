@@ -10,7 +10,7 @@
 [![Rust](https://img.shields.io/badge/rust-1.74%2B-orange?style=flat-square&logo=rust&color=%23f97316)](https://www.rust-lang.org/)
 [![MCP](https://img.shields.io/badge/MCP-Compatible-green?style=flat-square&color=%2310b981)](https://modelcontextprotocol.io)
 
-_The Eyes and Ears of AI Reasoning - Now Blazingly Fast_
+*The Eyes and Ears of AI Reasoning - Now Blazingly Fast*
 
 [Documentation](https://docs.rs/reasonkit-web) | [Crates.io](https://crates.io/crates/reasonkit-web) | [ReasonKit Core](https://github.com/ReasonKit/reasonkit-core) | [Website](https://reasonkit.sh)
 
@@ -91,6 +91,6 @@ Apache License 2.0 - see [LICENSE](LICENSE)
 
 [ReasonKit Core](https://github.com/ReasonKit/reasonkit-core) • [ReasonKit Mem](https://github.com/ReasonKit/reasonkit-mem) • [Website](https://reasonkit.sh)
 
-_"See How Your AI Thinks"_
+*"See How Your AI Thinks"*
 
 </div>

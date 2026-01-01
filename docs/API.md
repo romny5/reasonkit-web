@@ -14,11 +14,11 @@ ReasonKit Web is a high-performance MCP (Model Context Protocol) server for web 
 
 ReasonKit Web uses **JSON-RPC 2.0 over stdio** as defined by the MCP specification:
 
-| Property | Value |
-|----------|-------|
-| Transport | stdio (stdin/stdout) |
-| Format | JSON-RPC 2.0 |
-| Protocol Version | `2024-11-05` |
+| Property         | Value                |
+| ---------------- | -------------------- |
+| Transport        | stdio (stdin/stdout) |
+| Format           | JSON-RPC 2.0         |
+| Protocol Version | `2024-11-05`         |
 
 ### Quick Start
 
@@ -79,6 +79,7 @@ All requests and responses follow JSON-RPC 2.0 specification.
 Initialize the MCP session. Must be called before any other methods.
 
 **Request:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -96,6 +97,7 @@ Initialize the MCP session. Must be called before any other methods.
 ```
 
 **Response:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -120,6 +122,7 @@ Initialize the MCP session. Must be called before any other methods.
 Signal that initialization is complete. This is a notification (no response expected).
 
 **Request:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -132,6 +135,7 @@ Signal that initialization is complete. This is a notification (no response expe
 Request server shutdown.
 
 **Request:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -141,6 +145,7 @@ Request server shutdown.
 ```
 
 **Response:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -154,6 +159,7 @@ Request server shutdown.
 Health check endpoint for testing connectivity.
 
 **Request:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -163,6 +169,7 @@ Health check endpoint for testing connectivity.
 ```
 
 **Response:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -182,6 +189,7 @@ Health check endpoint for testing connectivity.
 List all available MCP tools.
 
 **Request:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -191,6 +199,7 @@ List all available MCP tools.
 ```
 
 **Response:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -213,6 +222,7 @@ List all available MCP tools.
 Execute a specific tool.
 
 **Request:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -226,6 +236,7 @@ Execute a specific tool.
 ```
 
 **Response:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -247,16 +258,16 @@ Execute a specific tool.
 
 ReasonKit Web provides 8 built-in tools for web automation:
 
-| Tool | Description |
-|------|-------------|
-| `web_navigate` | Navigate to a URL |
-| `web_screenshot` | Capture page screenshot |
-| `web_pdf` | Generate PDF of page |
-| `web_extract_content` | Extract main content |
-| `web_extract_links` | Extract all links |
-| `web_extract_metadata` | Extract page metadata |
-| `web_execute_js` | Execute JavaScript |
-| `web_capture_mhtml` | Capture complete MHTML archive |
+| Tool                   | Description                    |
+| ---------------------- | ------------------------------ |
+| `web_navigate`         | Navigate to a URL              |
+| `web_screenshot`       | Capture page screenshot        |
+| `web_pdf`              | Generate PDF of page           |
+| `web_extract_content`  | Extract main content           |
+| `web_extract_links`    | Extract all links              |
+| `web_extract_metadata` | Extract page metadata          |
+| `web_execute_js`       | Execute JavaScript             |
+| `web_capture_mhtml`    | Capture complete MHTML archive |
 
 ---
 
@@ -268,12 +279,13 @@ Navigate to a URL using a headless browser.
 
 **Parameters:**
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `url` | string | Yes | The URL to navigate to |
-| `waitFor` | string | No | CSS selector to wait for before returning |
+| Parameter | Type   | Required | Description                               |
+| --------- | ------ | -------- | ----------------------------------------- |
+| `url`     | string | Yes      | The URL to navigate to                    |
+| `waitFor` | string | No       | CSS selector to wait for before returning |
 
 **Request Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -290,6 +302,7 @@ Navigate to a URL using a headless browser.
 ```
 
 **Response Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -313,14 +326,15 @@ Capture a screenshot of a web page.
 
 **Parameters:**
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `url` | string | Yes | - | The URL to capture |
-| `fullPage` | boolean | No | `true` | Capture full page |
-| `format` | string | No | `"png"` | Image format: `png`, `jpeg`, `webp` |
-| `selector` | string | No | - | CSS selector to capture specific element |
+| Parameter  | Type    | Required | Default | Description                              |
+| ---------- | ------- | -------- | ------- | ---------------------------------------- |
+| `url`      | string  | Yes      | -       | The URL to capture                       |
+| `fullPage` | boolean | No       | `true`  | Capture full page                        |
+| `format`   | string  | No       | `"png"` | Image format: `png`, `jpeg`, `webp`      |
+| `selector` | string  | No       | -       | CSS selector to capture specific element |
 
 **Request Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -338,6 +352,7 @@ Capture a screenshot of a web page.
 ```
 
 **Response Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -362,12 +377,13 @@ Generate a PDF of a web page.
 
 **Parameters:**
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `url` | string | Yes | - | The URL to convert to PDF |
-| `printBackground` | boolean | No | `true` | Print background graphics |
+| Parameter         | Type    | Required | Default | Description               |
+| ----------------- | ------- | -------- | ------- | ------------------------- |
+| `url`             | string  | Yes      | -       | The URL to convert to PDF |
+| `printBackground` | boolean | No       | `true`  | Print background graphics |
 
 **Request Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -384,6 +400,7 @@ Generate a PDF of a web page.
 ```
 
 **Response Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -415,13 +432,14 @@ Extract main content from a web page as text or markdown.
 
 **Parameters:**
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `url` | string | Yes | - | The URL to extract content from |
-| `selector` | string | No | - | CSS selector (defaults to auto-detect main content) |
-| `format` | string | No | `"markdown"` | Output format: `text`, `markdown`, `html` |
+| Parameter  | Type   | Required | Default      | Description                                         |
+| ---------- | ------ | -------- | ------------ | --------------------------------------------------- |
+| `url`      | string | Yes      | -            | The URL to extract content from                     |
+| `selector` | string | No       | -            | CSS selector (defaults to auto-detect main content) |
+| `format`   | string | No       | `"markdown"` | Output format: `text`, `markdown`, `html`           |
 
 **Request Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -438,6 +456,7 @@ Extract main content from a web page as text or markdown.
 ```
 
 **Response Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -461,13 +480,14 @@ Extract all links from a web page with context.
 
 **Parameters:**
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `url` | string | Yes | - | The URL to extract links from |
-| `type` | string | No | `"all"` | Link type: `all`, `internal`, `external` |
-| `selector` | string | No | - | CSS selector to extract links from |
+| Parameter  | Type   | Required | Default | Description                              |
+| ---------- | ------ | -------- | ------- | ---------------------------------------- |
+| `url`      | string | Yes      | -       | The URL to extract links from            |
+| `type`     | string | No       | `"all"` | Link type: `all`, `internal`, `external` |
+| `selector` | string | No       | -       | CSS selector to extract links from       |
 
 **Request Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -484,6 +504,7 @@ Extract all links from a web page with context.
 ```
 
 **Response Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -507,11 +528,12 @@ Extract page metadata (title, description, Open Graph, Twitter Card, etc.).
 
 **Parameters:**
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `url` | string | Yes | The URL to extract metadata from |
+| Parameter | Type   | Required | Description                      |
+| --------- | ------ | -------- | -------------------------------- |
+| `url`     | string | Yes      | The URL to extract metadata from |
 
 **Request Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -527,6 +549,7 @@ Extract page metadata (title, description, Open Graph, Twitter Card, etc.).
 ```
 
 **Response Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -550,12 +573,13 @@ Execute JavaScript on a web page and return the result.
 
 **Parameters:**
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `url` | string | Yes | The URL to execute JavaScript on |
-| `script` | string | Yes | The JavaScript code to execute |
+| Parameter | Type   | Required | Description                      |
+| --------- | ------ | -------- | -------------------------------- |
+| `url`     | string | Yes      | The URL to execute JavaScript on |
+| `script`  | string | Yes      | The JavaScript code to execute   |
 
 **Request Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -572,6 +596,7 @@ Execute JavaScript on a web page and return the result.
 ```
 
 **Response Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -588,6 +613,7 @@ Execute JavaScript on a web page and return the result.
 ```
 
 **Advanced Example (DOM Manipulation):**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -611,11 +637,12 @@ Capture a complete web page as an MHTML archive (including all resources).
 
 **Parameters:**
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `url` | string | Yes | The URL to capture |
+| Parameter | Type   | Required | Description        |
+| --------- | ------ | -------- | ------------------ |
+| `url`     | string | Yes      | The URL to capture |
 
 **Request Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -631,6 +658,7 @@ Capture a complete web page as an MHTML archive (including all resources).
 ```
 
 **Response Example:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -660,13 +688,13 @@ Capture a complete web page as an MHTML archive (including all resources).
 
 Standard JSON-RPC 2.0 error codes:
 
-| Code | Message | Description |
-|------|---------|-------------|
-| `-32700` | Parse error | Invalid JSON |
-| `-32600` | Invalid Request | Invalid JSON-RPC request |
-| `-32601` | Method not found | Unknown method |
-| `-32602` | Invalid params | Invalid method parameters |
-| `-32603` | Internal error | Server-side error |
+| Code     | Message          | Description               |
+| -------- | ---------------- | ------------------------- |
+| `-32700` | Parse error      | Invalid JSON              |
+| `-32600` | Invalid Request  | Invalid JSON-RPC request  |
+| `-32601` | Method not found | Unknown method            |
+| `-32602` | Invalid params   | Invalid method parameters |
+| `-32603` | Internal error   | Server-side error         |
 
 ### Tool-Specific Errors
 
@@ -690,12 +718,12 @@ Tool execution errors are returned in the result with `isError: true`:
 
 ### Error Categories
 
-| Category | Examples |
-|----------|----------|
-| **Browser** | Launch failed, Connection lost, Timeout |
-| **Navigation** | Invalid URL, Timeout, SSL error, HTTP error |
+| Category       | Examples                                         |
+| -------------- | ------------------------------------------------ |
+| **Browser**    | Launch failed, Connection lost, Timeout          |
+| **Navigation** | Invalid URL, Timeout, SSL error, HTTP error      |
 | **Extraction** | Element not found, Invalid selector, Parse error |
-| **Capture** | Screenshot failed, PDF failed, MHTML failed |
+| **Capture**    | Screenshot failed, PDF failed, MHTML failed      |
 
 ---
 
@@ -880,12 +908,12 @@ The current implementation creates a new browser instance per tool execution. Fo
 
 Default timeout values:
 
-| Operation | Timeout |
-|-----------|---------|
-| Browser launch | 30s |
-| Navigation | 30s |
-| Screenshot | 30s |
-| PDF generation | 60s |
+| Operation      | Timeout |
+| -------------- | ------- |
+| Browser launch | 30s     |
+| Navigation     | 30s     |
+| Screenshot     | 30s     |
+| PDF generation | 60s     |
 
 ### Memory Usage
 
@@ -922,24 +950,30 @@ The browser runs with stealth mode enabled by default to avoid headless detectio
 ### Common Errors
 
 **Browser failed to launch:**
+
 ```
 Browser error: Failed to launch browser: no chrome found
 ```
+
 - Ensure Chrome/Chromium is installed
 - Set `CHROME_PATH` environment variable if needed
 
 **Navigation timeout:**
+
 ```
 Navigation error: Navigation timed out after 30000ms
 ```
+
 - Check network connectivity
 - Increase timeout for slow-loading pages
 - Verify the URL is correct
 
 **Element not found:**
+
 ```
 Extraction error: Element not found: #nonexistent
 ```
+
 - Verify the CSS selector is correct
 - Ensure the page has fully loaded
 - Use `waitFor` parameter in navigation
@@ -958,9 +992,9 @@ Log levels: `error`, `warn`, `info`, `debug`, `trace`
 
 ## Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 0.1.0 | 2025-01-01 | Initial release |
+| Version | Date       | Changes         |
+| ------- | ---------- | --------------- |
+| 0.1.0   | 2025-01-01 | Initial release |
 
 ---
 
@@ -975,7 +1009,7 @@ Log levels: `error`, `warn`, `info`, `debug`, `trace`
 
 <div align="center">
 
-**ReasonKit Web** - _The Eyes and Ears of AI Reasoning_
+**ReasonKit Web** - *The Eyes and Ears of AI Reasoning*
 
 [Website](https://reasonkit.sh) | [GitHub](https://github.com/ReasonKit/reasonkit-web) | [Crates.io](https://crates.io/crates/reasonkit-web)
 

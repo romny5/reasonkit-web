@@ -11,17 +11,17 @@
  * @license Apache-2.0
  */
 
-'use strict';
+"use strict";
 
-(async function() {
+(async function () {
   // Prevent double initialization
   if (window.__REASONKIT_INITIALIZED__) {
-    console.debug('[ReasonKit] Already initialized, skipping');
+    console.debug("[ReasonKit] Already initialized, skipping");
     return;
   }
   window.__REASONKIT_INITIALIZED__ = true;
 
-  console.log('[ReasonKit] Content script loaded');
+  console.log("[ReasonKit] Content script loaded");
 
   // Global state
   let wasmModule = null;
@@ -35,18 +35,18 @@
   async function initializeWasm() {
     try {
       // Dynamic import of WASM module
-      const wasmUrl = chrome.runtime.getURL('pkg/reasonkit_web_rs.js');
+      const wasmUrl = chrome.runtime.getURL("pkg/reasonkit_web_rs.js");
       const module = await import(wasmUrl);
 
       // Initialize WASM
       await module.default();
 
       wasmModule = module;
-      console.log('[ReasonKit] WASM module initialized');
+      console.log("[ReasonKit] WASM module initialized");
 
       return true;
     } catch (error) {
-      console.error('[ReasonKit] Failed to load WASM module:', error);
+      console.error("[ReasonKit] Failed to load WASM module:", error);
       return false;
     }
   }
@@ -56,7 +56,7 @@
    */
   async function getConfig() {
     return new Promise((resolve) => {
-      chrome.runtime.sendMessage({ type: 'GET_CONFIG' }, (response) => {
+      chrome.runtime.sendMessage({ type: "GET_CONFIG" }, (response) => {
         resolve(response.config || {});
       });
     });
@@ -67,7 +67,7 @@
    */
   async function getAuthToken() {
     return new Promise((resolve) => {
-      chrome.runtime.sendMessage({ type: 'GET_AUTH_TOKEN' }, (response) => {
+      chrome.runtime.sendMessage({ type: "GET_AUTH_TOKEN" }, (response) => {
         resolve(response.token);
       });
     });
@@ -78,10 +78,13 @@
    */
   async function notifyCaptureComplete(result) {
     return new Promise((resolve) => {
-      chrome.runtime.sendMessage({
-        type: 'CAPTURE_COMPLETE',
-        result: result
-      }, resolve);
+      chrome.runtime.sendMessage(
+        {
+          type: "CAPTURE_COMPLETE",
+          result: result,
+        },
+        resolve,
+      );
     });
   }
 
@@ -92,14 +95,14 @@
     // Rate limiting
     const now = Date.now();
     if (now - lastCaptureTime < MIN_CAPTURE_INTERVAL_MS) {
-      console.debug('[ReasonKit] Rate limited, skipping capture');
+      console.debug("[ReasonKit] Rate limited, skipping capture");
       return null;
     }
     lastCaptureTime = now;
 
     // Check if WASM is available
     if (!wasmModule) {
-      console.warn('[ReasonKit] WASM module not loaded');
+      console.warn("[ReasonKit] WASM module not loaded");
       return null;
     }
 
@@ -107,27 +110,30 @@
       const url = window.location.href;
       const domContent = document.documentElement.outerHTML;
 
-      console.debug('[ReasonKit] Capturing page:', url.substring(0, 50) + '...');
+      console.debug(
+        "[ReasonKit] Capturing page:",
+        url.substring(0, 50) + "...",
+      );
 
       const resultJson = await wasmModule.capture_page(url, domContent);
       const result = JSON.parse(resultJson);
 
-      console.debug('[ReasonKit] Capture result:', result);
+      console.debug("[ReasonKit] Capture result:", result);
 
       // Notify background script
       await notifyCaptureComplete(result);
 
       return result;
     } catch (error) {
-      console.error('[ReasonKit] Capture failed:', error);
+      console.error("[ReasonKit] Capture failed:", error);
 
       const errorResult = {
-        capture_id: '',
+        capture_id: "",
         success: false,
         error: error.message,
         content_size_bytes: 0,
         capture_duration_ms: 0,
-        server_response_ms: null
+        server_response_ms: null,
       };
 
       await notifyCaptureComplete(errorResult);
@@ -149,7 +155,7 @@
 
       // Debounce captures
       debounceTimer = setTimeout(() => {
-        console.debug('[ReasonKit] DOM mutations detected:', mutations.length);
+        console.debug("[ReasonKit] DOM mutations detected:", mutations.length);
         capturePage();
       }, debounceMs);
     });
@@ -159,10 +165,10 @@
       subtree: true,
       attributes: true,
       characterData: true,
-      attributeFilter: ['class', 'id', 'href', 'src']
+      attributeFilter: ["class", "id", "href", "src"],
     });
 
-    console.log('[ReasonKit] MutationObserver started');
+    console.log("[ReasonKit] MutationObserver started");
     return observer;
   }
 
@@ -170,22 +176,22 @@
    * Set up Page Visibility API handler.
    */
   function setupVisibilityHandler(observer) {
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') {
-        console.debug('[ReasonKit] Page became visible');
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        console.debug("[ReasonKit] Page became visible");
         if (!isObserving && observer) {
           observer.observe(document.body, {
             childList: true,
             subtree: true,
             attributes: true,
-            characterData: true
+            characterData: true,
           });
           isObserving = true;
         }
         // Capture on visibility restore
         capturePage();
       } else {
-        console.debug('[ReasonKit] Page became hidden');
+        console.debug("[ReasonKit] Page became hidden");
         if (isObserving && observer) {
           observer.disconnect();
           isObserving = false;
@@ -201,12 +207,14 @@
     try {
       // Load configuration
       const config = await getConfig();
-      console.log('[ReasonKit] Configuration loaded:', config.server_url);
+      console.log("[ReasonKit] Configuration loaded:", config.server_url);
 
       // Load WASM module
       const wasmLoaded = await initializeWasm();
       if (!wasmLoaded) {
-        console.error('[ReasonKit] Failed to initialize WASM, running in degraded mode');
+        console.error(
+          "[ReasonKit] Failed to initialize WASM, running in degraded mode",
+        );
         // Could implement fallback JavaScript-only capture here
         return;
       }
@@ -220,7 +228,7 @@
       const token = await getAuthToken();
       if (token && wasmModule && wasmModule.set_auth_token) {
         wasmModule.set_auth_token(token);
-        console.log('[ReasonKit] Auth token configured');
+        console.log("[ReasonKit] Auth token configured");
       }
 
       // Initial page capture
@@ -233,9 +241,9 @@
       // Set up visibility handler
       setupVisibilityHandler(observer);
 
-      console.log('[ReasonKit] Initialization complete');
+      console.log("[ReasonKit] Initialization complete");
     } catch (error) {
-      console.error('[ReasonKit] Initialization failed:', error);
+      console.error("[ReasonKit] Initialization failed:", error);
     }
   }
 

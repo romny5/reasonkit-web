@@ -22,7 +22,7 @@ flowchart LR
 
         C --> D --> E
     end
-    
+
     E -.->|delegates to| F[reasonkit-mem<br/>Triangulation]
 ```
 
@@ -91,5 +91,4 @@ PDFs, HTML    Links, Structured Data
 
 ---
 
-_"Designed, Not Dreamed" | https://reasonkit.sh_
-
+*"Designed, Not Dreamed" | <https://reasonkit.sh>*

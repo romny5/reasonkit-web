@@ -15,7 +15,7 @@ We adhere to Semantic Versioning 2.0.0. Security updates are provided for the cu
 
 If you discover a security vulnerability in ReasonKit Web, please report it privately:
 
-1. **Email:** security@reasonkit.sh
+1. **Email:** <security@reasonkit.sh>
 2. **Response Time:** We are committed to responding to security reports within 48 hours.
 3. **Process:**
    - We will investigate and verify the issue.
@@ -83,7 +83,7 @@ We use `cargo-deny` to ensure:
 3. **Audit scripts:** Review any JavaScript executed in pages for security implications.
 4. **Secure MCP transport:** Use authentication when exposing MCP endpoints externally.
 5. **Handle captured data:** Treat screenshots and page content as potentially sensitive.
-6. **Update regularly:** Keep reasonkit-web and Chromium/Chrome updated for security patches.
+6. **Update regularly:** Keep ReasonKit-web and Chromium/Chrome updated for security patches.
 7. **Monitor resource usage:** Browser automation can be resource-intensive; implement limits.
 
 ## Chromium Security Notes

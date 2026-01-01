@@ -4,11 +4,11 @@ Production deployment configuration for Debian 13 (Trixie).
 
 ## Files
 
-| File | Description |
-|------|-------------|
-| `reasonkit-web.service` | systemd unit file with security hardening |
-| `reasonkit-web.env.example` | Environment configuration template |
-| `install.sh` | Automated installation script |
+| File                        | Description                               |
+| --------------------------- | ----------------------------------------- |
+| `reasonkit-web.service`     | systemd unit file with security hardening |
+| `reasonkit-web.env.example` | Environment configuration template        |
+| `install.sh`                | Automated installation script             |
 
 ## Quick Start
 
@@ -57,12 +57,12 @@ The service unit implements defense-in-depth security:
 
 ## Resource Limits
 
-| Resource | Limit |
-|----------|-------|
-| Memory | 512M max, 448M high watermark |
-| CPU | 100% quota |
-| Tasks | 100 max |
-| File descriptors | 65536 |
+| Resource         | Limit                         |
+| ---------------- | ----------------------------- |
+| Memory           | 512M max, 448M high watermark |
+| CPU              | 100% quota                    |
+| Tasks            | 100 max                       |
+| File descriptors | 65536                         |
 
 ## Watchdog
 

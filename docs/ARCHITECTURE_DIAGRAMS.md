@@ -20,7 +20,7 @@ flowchart LR
 
         C --> D --> E
     end
-    
+
     E -.->|delegates to| F[reasonkit-mem<br/>Triangulation]
 ```
 
@@ -31,12 +31,14 @@ flowchart LR
 **File:** [`../assets/svg/web_sensing_layer.svg`](../assets/svg/web_sensing_layer.svg)
 
 **Brand Compliance:**
+
 - ✅ Colors: Cyan (#06b6d4), Purple (#a855f7), Pink (#ec4899), Green (#10b981)
 - ✅ Fonts: Inter (labels), JetBrains Mono (code)
 - ✅ Background: Void Black (#030508)
 - ✅ Matches codebase architecture (Extraction, not Triangulate)
 
 **Usage:**
+
 - Inline in HTML: `<img src="assets/svg/web_sensing_layer.svg" alt="Web Sensing Layer Architecture">`
 - Export to PNG for GitHub social previews
 - Include in documentation sites
@@ -81,7 +83,7 @@ flowchart LR
 3. **Browser Controller**: Controls headless Chromium via Chrome DevTools Protocol
 4. **Capture**: Captures visual and structural data (screenshots, PDFs, HTML)
 5. **Extraction**: Extracts semantic content, metadata, and structured data
-6. **reasonkit-mem**: (External) Performs multi-source triangulation and verification
+6. **ReasonKit-mem**: (External) Performs multi-source triangulation and verification
 
 ### Key Design Decisions
 
@@ -92,5 +94,4 @@ flowchart LR
 
 ---
 
-_"Designed, Not Dreamed" | https://reasonkit.sh_
-
+*"Designed, Not Dreamed" | <https://reasonkit.sh>*

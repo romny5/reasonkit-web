@@ -20,13 +20,13 @@ sudo ./scripts/configure.sh --start --enable
 
 ## Scripts Overview
 
-| Script | Purpose |
-|--------|---------|
-| `install.sh` | Install binary, create user, setup systemd |
-| `configure.sh` | Interactive or automated configuration |
-| `uninstall.sh` | Remove installation |
-| `verify.sh` | Post-installation verification |
-| `reasonkit-web.service` | Systemd service template |
+| Script                  | Purpose                                    |
+| ----------------------- | ------------------------------------------ |
+| `install.sh`            | Install binary, create user, setup systemd |
+| `configure.sh`          | Interactive or automated configuration     |
+| `uninstall.sh`          | Remove installation                        |
+| `verify.sh`             | Post-installation verification             |
+| `reasonkit-web.service` | Systemd service template                   |
 
 ## Installation (install.sh)
 
@@ -77,6 +77,7 @@ sudo ./configure.sh --start --enable
 ```
 
 Prompts for:
+
 - Log level
 - Chrome/Chromium path
 - Headless mode
@@ -93,14 +94,14 @@ sudo RUST_LOG=debug \
 
 ### Environment Variables
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `RUST_LOG` | `info` | Log level (error/warn/info/debug/trace) |
-| `CHROME_PATH` | auto | Chrome/Chromium binary path |
-| `REASONKIT_HEADLESS` | `true` | Run browser headless |
-| `REASONKIT_DISABLE_GPU` | `true` | Disable GPU acceleration |
-| `MCP_TIMEOUT_SECS` | `30` | MCP request timeout |
-| `TOKIO_WORKER_THREADS` | `4` | Async runtime threads |
+| Variable                | Default | Description                             |
+| ----------------------- | ------- | --------------------------------------- |
+| `RUST_LOG`              | `info`  | Log level (error/warn/info/debug/trace) |
+| `CHROME_PATH`           | auto    | Chrome/Chromium binary path             |
+| `REASONKIT_HEADLESS`    | `true`  | Run browser headless                    |
+| `REASONKIT_DISABLE_GPU` | `true`  | Disable GPU acceleration                |
+| `MCP_TIMEOUT_SECS`      | `30`    | MCP request timeout                     |
+| `TOKIO_WORKER_THREADS`  | `4`     | Async runtime threads                   |
 
 ## Uninstallation (uninstall.sh)
 
@@ -114,11 +115,11 @@ sudo ./uninstall.sh --purge --remove-user --yes
 
 ### Options
 
-| Option | Description |
-|--------|-------------|
-| `--purge` | Remove config, data, and logs |
-| `--remove-user` | Remove the reasonkit user |
-| `--yes` | Skip confirmation prompts |
+| Option          | Description                   |
+| --------------- | ----------------------------- |
+| `--purge`       | Remove config, data, and logs |
+| `--remove-user` | Remove the ReasonKit user     |
+| `--yes`         | Skip confirmation prompts     |
 
 ## Verification (verify.sh)
 

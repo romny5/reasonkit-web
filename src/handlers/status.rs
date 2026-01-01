@@ -48,7 +48,7 @@ use axum::Json;
 use hdrhistogram::Histogram;
 use parking_lot::RwLock;
 use serde::{Deserialize, Serialize};
-use sysinfo::{Pid, ProcessRefreshKind, System};
+use sysinfo::{Pid, System};
 use tracing::{debug, instrument};
 
 /// Server version from Cargo.toml
@@ -470,7 +470,8 @@ fn collect_memory_metrics() -> MemoryMetrics {
     let mut system = System::new();
 
     // Refresh only the current process with memory info
-    system.refresh_process_specifics(pid, ProcessRefreshKind::new().with_memory());
+    // sysinfo 0.30 API: refresh_process instead of refresh_process_specifics
+    system.refresh_process(pid);
 
     match system.process(pid) {
         Some(process) => MemoryMetrics {

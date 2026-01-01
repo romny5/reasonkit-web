@@ -15,7 +15,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: builder  # Stop at builder stage for development
+      target: builder # Stop at builder stage for development
 
     # Development environment
     environment:
@@ -37,7 +37,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '4.0'
+          cpus: "4.0"
           memory: 4G
 
     # Disable read-only for development

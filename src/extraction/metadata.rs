@@ -96,48 +96,48 @@ impl MetadataExtractor {
                     metaTags: {},
                     jsonLd: []
                 };
-                
+
                 // Extract meta tags
                 document.querySelectorAll('meta').forEach(meta => {
                     const name = meta.getAttribute('name') || meta.getAttribute('property');
                     const content = meta.getAttribute('content');
-                    
+
                     if (!name || !content) return;
-                    
+
                     result.metaTags[name] = content;
-                    
+
                     // Standard meta
                     if (name === 'description') result.description = content;
                     if (name === 'author') result.author = content;
                     if (name === 'keywords') {
                         result.keywords = content.split(',').map(k => k.trim()).filter(k => k);
                     }
-                    
+
                     // Open Graph
                     if (name.startsWith('og:')) {
                         const key = name.replace('og:', '');
                         result.openGraph[key] = content;
                     }
-                    
+
                     // Twitter Card
                     if (name.startsWith('twitter:')) {
                         const key = name.replace('twitter:', '');
                         result.twitterCard[key] = content;
                     }
                 });
-                
+
                 // Canonical URL
                 const canonical = document.querySelector('link[rel="canonical"]');
                 if (canonical) {
                     result.canonical = canonical.getAttribute('href');
                 }
-                
+
                 // Favicon
                 const favicon = document.querySelector('link[rel="icon"], link[rel="shortcut icon"]');
                 if (favicon) {
                     result.favicon = favicon.getAttribute('href');
                 }
-                
+
                 // JSON-LD
                 document.querySelectorAll('script[type="application/ld+json"]').forEach(script => {
                     try {
@@ -145,7 +145,7 @@ impl MetadataExtractor {
                         result.jsonLd.push(data);
                     } catch (e) {}
                 });
-                
+
                 return result;
             })()
         "#;

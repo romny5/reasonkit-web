@@ -62,14 +62,14 @@ impl LinkExtractor {
                 const links = [];
                 const baseUrl = window.location.origin;
                 const currentHost = window.location.hostname;
-                
+
                 document.querySelectorAll('a[href]').forEach((el, index) => {
                     const href = el.getAttribute('href') || '';
                     const text = el.innerText.trim() || el.textContent.trim();
                     const title = el.getAttribute('title');
                     const rel = el.getAttribute('rel');
                     const target = el.getAttribute('target');
-                    
+
                     // Get context (parent text or siblings)
                     let context = '';
                     try {
@@ -78,7 +78,7 @@ impl LinkExtractor {
                             context = parent.innerText.substring(0, 200);
                         }
                     } catch (e) {}
-                    
+
                     // Determine link type
                     let linkType = 'other';
                     if (href.startsWith('#')) {
@@ -101,17 +101,17 @@ impl LinkExtractor {
                             linkType = 'other';
                         }
                     }
-                    
+
                     // Resolve relative URLs
                     let fullUrl = href;
-                    if (!href.startsWith('http') && !href.startsWith('mailto:') && 
+                    if (!href.startsWith('http') && !href.startsWith('mailto:') &&
                         !href.startsWith('tel:') && !href.startsWith('javascript:') &&
                         !href.startsWith('#')) {
                         try {
                             fullUrl = new URL(href, baseUrl).href;
                         } catch (e) {}
                     }
-                    
+
                     links.push({
                         url: fullUrl,
                         text: text.substring(0, 500),
@@ -123,7 +123,7 @@ impl LinkExtractor {
                         position: index
                     });
                 });
-                
+
                 return links;
             })()
         "#;
@@ -208,18 +208,18 @@ impl LinkExtractor {
             (() => {{
                 const container = document.querySelector('{}');
                 if (!container) return [];
-                
+
                 const links = [];
                 const baseUrl = window.location.origin;
                 const currentHost = window.location.hostname;
-                
+
                 container.querySelectorAll('a[href]').forEach((el, index) => {{
                     const href = el.getAttribute('href') || '';
                     const text = el.innerText.trim() || el.textContent.trim();
                     const title = el.getAttribute('title');
                     const rel = el.getAttribute('rel');
                     const target = el.getAttribute('target');
-                    
+
                     let linkType = 'other';
                     if (href.startsWith('#')) {{
                         linkType = 'anchor';
@@ -235,16 +235,16 @@ impl LinkExtractor {
                             linkType = url.hostname === currentHost ? 'internal' : 'external';
                         }} catch (e) {{}}
                     }}
-                    
+
                     let fullUrl = href;
-                    if (!href.startsWith('http') && !href.startsWith('mailto:') && 
+                    if (!href.startsWith('http') && !href.startsWith('mailto:') &&
                         !href.startsWith('tel:') && !href.startsWith('javascript:') &&
                         !href.startsWith('#')) {{
                         try {{
                             fullUrl = new URL(href, baseUrl).href;
                         }} catch (e) {{}}
                     }}
-                    
+
                     links.push({{
                         url: fullUrl,
                         text: text.substring(0, 500),
@@ -256,7 +256,7 @@ impl LinkExtractor {
                         position: index
                     }});
                 }});
-                
+
                 return links;
             }})()
             "#,
