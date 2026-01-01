@@ -32,7 +32,7 @@ targets = [
 tokio = { version = "1", features = ["full"] }
 
 # CDP/Browser automation
-chromiumoxide = { version = "0.7", features = ["tokio-runtime"] }
+chromiumoxide = { version = "0.8", features = ["tokio-runtime"] }
 
 # MCP server
 rmcp = "0.1"
@@ -40,6 +40,9 @@ rmcp = "0.1"
 # Serialization
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+
+# Date/time handling
+chrono = { version = "0.4", features = ["serde"] }
 
 # WASM support (optional; enabled via `wasm` feature)
 wasm-bindgen = { version = "0.2", optional = true }
@@ -65,11 +68,28 @@ base64 = "0.22.1"
 futures = "0.3.31"
 regex = "1.12.2"
 rand = "0.9.2"
+htmlescape = "0.3"
+
+# Web framework
+axum = "0.7"
+http = "1"
+tower = "0.5"
+tower-http = { version = "0.6", features = ["cors"] }
+hyper = "1"
+
+# Handlers dependencies
+metrics = "0.24"
+url = "2"
+uuid = { version = "1", features = ["v4", "serde"] }
+hdrhistogram = "7"
+parking_lot = "0.12"
+sysinfo = "0.33"
 
 [dev-dependencies]
 tokio-test = "0.4"
 pretty_assertions = "1"
 criterion = { version = "0.5", features = ["html_reports"] }
+proptest = "1.4"
 
 # WASM browser testing dependencies
 wasm-bindgen = "0.2"
