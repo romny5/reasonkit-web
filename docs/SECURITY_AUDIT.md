@@ -927,8 +927,8 @@ Before deployment, verify:
 
 ## Appendix B: Related Security Documents
 
-- `/home/zyxsys/RK-PROJECT/reasonkit-web/SECURITY.md` - Vulnerability reporting policy
-- `/home/zyxsys/RK-PROJECT/reasonkit-web/docs/ARCHITECTURE.md` - System architecture
+- `../SECURITY.md` - Vulnerability reporting policy
+- `ARCHITECTURE.md` - System architecture
 
 ---
 
