@@ -166,9 +166,9 @@ impl SecurityConfig {
                 "http://localhost".to_string(),
                 "http://127.0.0.1".to_string(),
                 "http://localhost:3000".to_string(),
-                "http://localhost:8080".to_string(),
+                "http://localhost:9100".to_string(),
                 "http://127.0.0.1:3000".to_string(),
-                "http://127.0.0.1:8080".to_string(),
+                "http://127.0.0.1:9100".to_string(),
             ],
             auth_bypass_paths: vec!["/health".to_string(), "/healthz".to_string()],
         })

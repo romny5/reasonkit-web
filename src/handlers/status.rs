@@ -494,7 +494,7 @@ fn collect_memory_metrics() -> MemoryMetrics {
 /// # Example
 ///
 /// ```bash
-/// curl http://localhost:8080/health
+/// curl http://localhost:9101/health
 /// # {"status":"healthy"}
 /// ```
 #[instrument(skip_all)]
@@ -523,7 +523,7 @@ pub async fn health_handler() -> impl IntoResponse {
 /// # Example
 ///
 /// ```bash
-/// curl http://localhost:8080/status
+/// curl http://localhost:9101/status
 /// # {
 /// #   "version": "0.1.0",
 /// #   "name": "reasonkit-web",

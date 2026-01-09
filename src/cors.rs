@@ -538,10 +538,10 @@ mod tests {
 
     #[test]
     fn test_localhost_origin_with_port_and_path() {
-        let origin = HeaderValue::from_static("http://localhost:8080/api/v1");
+        let origin = HeaderValue::from_static("http://localhost:9100/api/v1");
         assert!(
             is_localhost_origin(&origin),
-            "http://localhost:8080/api/v1 should be allowed"
+            "http://localhost:9100/api/v1 should be allowed"
         );
     }
 

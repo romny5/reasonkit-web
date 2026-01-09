@@ -524,7 +524,7 @@ mod tests {
 
     #[test]
     fn test_localhost_check_127001() {
-        assert!(UrlValidator::is_localhost("http://127.0.0.1:8080"));
+        assert!(UrlValidator::is_localhost("http://127.0.0.1:9100"));
         assert!(UrlValidator::is_localhost("https://127.0.0.1/path"));
     }
 
@@ -536,12 +536,12 @@ mod tests {
 
     #[test]
     fn test_localhost_check_ipv6_loopback() {
-        assert!(UrlValidator::is_localhost("http://[::1]:8080"));
+        assert!(UrlValidator::is_localhost("http://[::1]:9100"));
     }
 
     #[test]
     fn test_localhost_check_zero_addr() {
-        assert!(UrlValidator::is_localhost("http://0.0.0.0:8080"));
+        assert!(UrlValidator::is_localhost("http://0.0.0.0:9100"));
     }
 
     #[test]
@@ -554,7 +554,7 @@ mod tests {
     #[test]
     fn test_is_external() {
         assert!(UrlValidator::is_external("https://example.com"));
-        assert!(!UrlValidator::is_external("http://localhost:8080"));
+        assert!(!UrlValidator::is_external("http://localhost:9100"));
         assert!(!UrlValidator::is_external("http://127.0.0.1"));
     }
 
@@ -573,7 +573,7 @@ mod tests {
     #[test]
     fn test_extract_host_with_port() {
         assert_eq!(
-            UrlValidator::extract_host("http://localhost:8080/api"),
+            UrlValidator::extract_host("http://localhost:9100/api"),
             Some("localhost".to_string())
         );
     }
@@ -716,8 +716,8 @@ mod tests {
 
     #[test]
     fn test_localhost_case_insensitive() {
-        assert!(UrlValidator::is_localhost("http://LOCALHOST:8080"));
-        assert!(UrlValidator::is_localhost("http://LocalHost:8080"));
+        assert!(UrlValidator::is_localhost("http://LOCALHOST:9100"));
+        assert!(UrlValidator::is_localhost("http://LocalHost:9100"));
     }
 
     #[test]
