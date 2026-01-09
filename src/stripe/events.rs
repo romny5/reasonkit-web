@@ -2,6 +2,8 @@
 //!
 //! Strongly-typed representations of Stripe webhook events for SaaS subscriptions.
 
+use std::str::FromStr;
+
 use serde::{Deserialize, Serialize};
 
 use crate::stripe::error::{StripeWebhookError, StripeWebhookResult};
@@ -33,10 +35,11 @@ pub enum StripeEventType {
     Unknown,
 }
 
-impl StripeEventType {
-    /// Parse event type from string
-    pub fn from_str(s: &str) -> Self {
-        match s {
+impl FromStr for StripeEventType {
+    type Err = std::convert::Infallible;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        Ok(match s {
             "customer.created" => Self::CustomerCreated,
             "customer.subscription.created" => Self::SubscriptionCreated,
             "customer.subscription.updated" => Self::SubscriptionUpdated,
@@ -44,9 +47,11 @@ impl StripeEventType {
             "invoice.payment_succeeded" => Self::InvoicePaymentSucceeded,
             "invoice.payment_failed" => Self::InvoicePaymentFailed,
             _ => Self::Unknown,
-        }
+        })
     }
+}
 
+impl StripeEventType {
     /// Get the string representation
     pub fn as_str(&self) -> &'static str {
         match self {
@@ -106,7 +111,8 @@ impl StripeEvent {
 
     /// Get the typed event type
     pub fn typed_event_type(&self) -> StripeEventType {
-        StripeEventType::from_str(&self.event_type)
+        // Infallible error type means this can never fail
+        StripeEventType::from_str(&self.event_type).unwrap()
     }
 
     /// Extract subscription from event data
@@ -426,15 +432,15 @@ mod tests {
     #[test]
     fn test_event_type_parsing() {
         assert_eq!(
-            StripeEventType::from_str("customer.subscription.created"),
+            StripeEventType::from_str("customer.subscription.created").unwrap(),
             StripeEventType::SubscriptionCreated
         );
         assert_eq!(
-            StripeEventType::from_str("invoice.payment_succeeded"),
+            StripeEventType::from_str("invoice.payment_succeeded").unwrap(),
             StripeEventType::InvoicePaymentSucceeded
         );
         assert_eq!(
-            StripeEventType::from_str("unknown.event"),
+            StripeEventType::from_str("unknown.event").unwrap(),
             StripeEventType::Unknown
         );
     }

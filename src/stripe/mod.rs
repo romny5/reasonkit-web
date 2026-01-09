@@ -1,3 +1,6 @@
+// Allow missing docs in this module - stripe integration is internal
+#![allow(missing_docs)]
+
 //! Stripe Webhook Handler Module
 //!
 //! This module provides secure, production-ready Stripe webhook handling for SaaS

@@ -27,15 +27,15 @@ Web sensing and browser automation layer for ReasonKit. Implements the Model Con
 
 ## Features
 
-![ReasonKit Web Features](./brand/readme/features.png)
+![ReasonKit Web Features](https://raw.githubusercontent.com/Lenvanderhof/ReasonKit/main/reasonkit-web/brand/readme/features.png)
 
 ## Use Cases
 
-![ReasonKit Web Use Cases](./brand/readme/use_cases.png)
+![ReasonKit Web Use Cases](https://raw.githubusercontent.com/Lenvanderhof/ReasonKit/main/reasonkit-web/brand/readme/use_cases.png)
 
 ## Performance
 
-![ReasonKit Web Performance Benchmark](./brand/readme/performance_benchmark.png)
+![ReasonKit Web Performance Benchmark](https://raw.githubusercontent.com/Lenvanderhof/ReasonKit/main/reasonkit-web/brand/readme/performance_benchmark.png)
 
 ## Installation
 

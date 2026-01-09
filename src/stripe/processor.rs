@@ -71,6 +71,8 @@ pub struct EventProcessor<H: SubscriptionHandler, S: IdempotencyStore> {
 /// A processing task sent to background workers
 struct ProcessingTask {
     event: StripeEvent,
+    /// Retry attempt counter (reserved for future retry logic)
+    #[allow(dead_code)]
     attempt: u32,
 }
 
